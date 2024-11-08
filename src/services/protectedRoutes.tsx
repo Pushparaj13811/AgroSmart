@@ -8,7 +8,6 @@ import { ProtectedRouteProps } from '../types/types';
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, adminOnly = false }) => {
     const navigate = useNavigate();
     const { user, status } = useSelector((state: RootState) => state.user);
-
     useEffect(() => {
         if (status === 'loading') return;
 

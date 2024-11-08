@@ -4,6 +4,7 @@ import { LogIn } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import { userActions } from '../../store/userSlice';
+import FlowerSpinner from '../../components/FlowerSpinner';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -18,17 +19,14 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Login logic here
-
     const resultAction = await dispatch(
       userActions.login({
         email: formData.email,
         password: formData.password
       })
     )
-    // Check if login was successful
     if (userActions.login.fulfilled.match(resultAction)) {
-      navigate('/dashboard'); // Navigate to a protected route on success
+      navigate('/profile');
     } else {
       console.error('Login failed:', resultAction.payload || resultAction.error.message);
     }
@@ -49,7 +47,7 @@ const Login = () => {
           </p>
         </div>
 
-        {status === 'loading' && <p className="text-center text-green-600">Logging in...</p>}
+        {status === 'loading' && <div><FlowerSpinner size={160} color='green' /></div>}
         {error && <p className="text-center text-red-600">{error}</p>}
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

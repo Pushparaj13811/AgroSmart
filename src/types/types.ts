@@ -19,7 +19,7 @@ interface BlogPost {
 
 }
 interface Video {
-    id: string;
+    id?: string;
     thumbnail: string;
     title: string;
     videoUrl: string;
@@ -48,6 +48,7 @@ interface Post {
     comments: Comment[];
 }
 interface User {
+    id?: string;
     username: string;
     email: string;
     password: string;
@@ -67,7 +68,15 @@ interface UserState {
 }
 
 interface Crop {
-    id: string;
+    id?: string;
+    name: string;
+    description: string;
+    image: File;
+    climate: string;
+    soil: string;
+    irrigation: string;
+    fertilization: string;
+    harvesting: string;
 }
 
 interface CropState {
@@ -81,6 +90,7 @@ interface Response {
 }
 
 interface Article {
+    id?: string;
     title: string;
     content: string;
     image: File;
@@ -88,6 +98,7 @@ interface Article {
 }
 
 interface VideoData {
+    id?: string;
     video: File;
     thumbnail: File;
     title: string;
@@ -96,6 +107,19 @@ interface VideoData {
     category: string;
 }
 
+interface ArticleState {
+    articles: Article[];
+    selectedArticle: Article | null;
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+}
+
+interface VideoState {
+    videos: Video[];
+    selectedVideo: Video | null;
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+}
 
 export type {
     LucideIconName,
@@ -110,5 +134,7 @@ export type {
     CropState,
     Response,
     Article,
-    VideoData
+    VideoData,
+    ArticleState,
+    VideoState,
 };

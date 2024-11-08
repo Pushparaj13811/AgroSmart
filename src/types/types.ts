@@ -1,4 +1,6 @@
 import * as LucideIcons from 'lucide-react';
+import { ReactNode } from 'react';
+
 
 type LucideIconName = keyof typeof LucideIcons;
 
@@ -121,6 +123,12 @@ interface VideoState {
     error: string | null;
 }
 
+interface ProtectedRouteProps {
+    children: ReactNode;
+    adminOnly?: boolean;
+}
+
+
 export type {
     LucideIconName,
     Feature,
@@ -137,4 +145,5 @@ export type {
     VideoData,
     ArticleState,
     VideoState,
+    ProtectedRouteProps
 };

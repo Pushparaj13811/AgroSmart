@@ -9,6 +9,19 @@ import ForgotPassword from "./auth/ForgotPassword";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import AdminDashboard from "./admin/AdminDashboard";
+import UserProfile from "./user/UserProfile";
 
-
-export { Home, About, Features, DiseaseDetection, Blog, BlogPost, VideoLibrary, ForgotPassword, Login, Register, AdminDashboard };
+export {
+    Home,
+    About,
+    Features,
+    DiseaseDetection,
+    Blog,
+    BlogPost,
+    VideoLibrary,
+    ForgotPassword,
+    Login,
+    Register,
+    AdminDashboard,
+    UserProfile
+};

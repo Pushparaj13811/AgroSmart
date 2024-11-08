@@ -26,5 +26,12 @@ export interface Video {
     description: string;
     duration: string;
     category: string;
-  }
-  
+}
+
+export interface DetectionResultData {
+    disease: string;
+    confidence: number;
+    description: string;
+    treatment: string;
+    preventiveMeasures: string[];
+}

@@ -68,7 +68,7 @@ Here are some screenshots of the app:
 
 ### Home Page
 
-![Home Page](./src/assets/screenshots/home.png)
+![Home Page](./src/assets/screenshots/Home.png)
 
 ### Features Page
 
@@ -80,7 +80,7 @@ Here are some screenshots of the app:
 
 ### Blog Page
 
-![Blog Page](./src/assets/screenshots/blog.png)
+![Blog Page](./src/assets/screenshots/Blog.png)
 
 ### Crop Disease Detection
 
@@ -89,7 +89,7 @@ Here are some screenshots of the app:
 ![Analysing](./src/assets/screenshots/analysing.png)
 ### About Page
 
-![About Page](./src/assets/screenshots/about.png)
+![About Page](./src/assets/screenshots/About.png)
 
 ## Folder Structure
 

@@ -1,16 +1,39 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LogIn } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
+import { userActions } from '../../store/userSlice';
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const { status, error } = useSelector((state: RootState) => state.user);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // API call would go here
+
+    // Login logic here
+
+    const resultAction = await dispatch(
+      userActions.login({
+        email: formData.email,
+        password: formData.password
+      })
+    )
+    // Check if login was successful
+    if (userActions.login.fulfilled.match(resultAction)) {
+      navigate('/dashboard'); // Navigate to a protected route on success
+    } else {
+      console.error('Login failed:', resultAction.payload || resultAction.error.message);
+    }
+
+
   };
 
   return (
@@ -25,6 +48,10 @@ const Login = () => {
             Sign in to your account
           </p>
         </div>
+
+        {status === 'loading' && <p className="text-center text-green-600">Logging in...</p>}
+        {error && <p className="text-center text-red-600">{error}</p>}
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
@@ -78,11 +105,13 @@ const Login = () => {
             </Link>
           </div>
 
+
           <button
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            disabled={status === 'loading'}
           >
-            Sign in
+            {status === 'loading' ? 'Signing in...' : 'Sign in'}
           </button>
 
           <p className="text-center text-sm text-gray-600">

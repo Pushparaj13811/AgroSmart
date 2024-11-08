@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { Upload, AlertCircle } from 'lucide-react';
+import { useState } from 'react';
+import { AlertCircle } from 'lucide-react';
 import ImageUploader from '../components/ImageUploader';
 import DetectionResult from '../components/DetectionResult';
+import { DetectionResultData } from '../types/types';
 
 const DiseaseDetection = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<DetectionResultData | null>(null);
 
   const handleImageUpload = async (file: File) => {
     setIsAnalyzing(true);
+    console.log('Uploading image:', file);
     // Simulated API call
     setTimeout(() => {
       setResult({
@@ -24,7 +26,7 @@ const DiseaseDetection = () => {
         ]
       });
       setIsAnalyzing(false);
-    }, 2000);
+    }, 10000);
   };
 
   return (
@@ -39,14 +41,14 @@ const DiseaseDetection = () => {
       </div>
 
       {!result && (
-        <ImageUploader 
+        <ImageUploader
           onUpload={handleImageUpload}
           isLoading={isAnalyzing}
         />
       )}
 
       {result && (
-        <DetectionResult 
+        <DetectionResult
           result={result}
           onReset={() => setResult(null)}
         />

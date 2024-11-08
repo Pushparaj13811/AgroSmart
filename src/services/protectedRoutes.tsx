@@ -21,14 +21,14 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, adminOnly = f
 
 
     if (status === 'loading') {
-        return React.isValidElement(LoadingSpinner) ? React.cloneElement(LoadingSpinner) : null;
+        return <LoadingSpinner />;
     }
 
     if (!user || (adminOnly && user.role !== 'admin')) {
         return null;
     }
 
-    return React.isValidElement(children) ? React.cloneElement(children) : null;
+    return <>{children}</>;
 };
 
 export default ProtectedRoute;

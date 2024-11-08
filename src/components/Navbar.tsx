@@ -1,9 +1,34 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, Sprout } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../store/store';
+import { userActions } from '../store/userSlice';
 
 const Navbar = () => {
+  const user = useSelector((state: RootState) => state.user.user);
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+
+  const handleLogout = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const response = await dispatch(userActions.logout());
+
+    if (userActions.logout.fulfilled.match(response)) {
+
+      localStorage.removeItem('user');
+
+      navigate('/');
+    } else {
+      console.error('Logout failed:', response.payload || response.error.message);
+    }
+  };
+
+
+
 
   return (
     <nav className="bg-green-700 text-white top-0 sticky shadow-lg z-50">
@@ -23,9 +48,13 @@ const Navbar = () => {
             <Link to="/features" className="hover:text-green-200 transition">Features</Link>
             <Link to="/blog" className="hover:text-green-200 transition">Blog</Link>
             <Link to="/videos" className="hover:text-green-200 transition">Videos</Link>
-            <Link to="/login" className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">
-              Login
-            </Link>
+            {user ? (
+              <button onClick={handleLogout} className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">Logout</button>
+            ) : (
+              <Link to="/login" className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">
+                Login
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}

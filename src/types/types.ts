@@ -1,14 +1,14 @@
 import * as LucideIcons from 'lucide-react';
 
-export type LucideIconName = keyof typeof LucideIcons;
+type LucideIconName = keyof typeof LucideIcons;
 
-export interface Feature {
+interface Feature {
     icon: LucideIconName;
     title: string;
     description: string;
 }
 
-export interface BlogPost {
+interface BlogPost {
     id: string;
     title: string;
     excerpt: string;
@@ -18,7 +18,7 @@ export interface BlogPost {
     category: string;
 
 }
-export interface Video {
+interface Video {
     id: string;
     thumbnail: string;
     title: string;
@@ -28,10 +28,24 @@ export interface Video {
     category: string;
 }
 
-export interface DetectionResultData {
+interface DetectionResultData {
     disease: string;
     confidence: number;
     description: string;
     treatment: string;
     preventiveMeasures: string[];
 }
+
+interface Post {
+    id: string;
+    title: string;
+    content: string;
+    author: string;
+    date: string;
+    category: string;
+    image: string;
+    likes: number;
+    comments: Comment[];
+}
+
+export type { LucideIconName, Feature, BlogPost, Video, DetectionResultData, Post };

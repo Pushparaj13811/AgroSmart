@@ -7,7 +7,7 @@ const blogPosts: BlogPost[] = [
         excerpt: "A comprehensive guide to maintaining optimal soil health for better crop production.",
         image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&q=80",
         author: "Prakriti Rizal",
-        date: "2024-03-10",
+        date: "January 10, 2024",
         category: "Soil Management"
     },
     {
@@ -25,7 +25,7 @@ const blogPosts: BlogPost[] = [
         excerpt: 'Learn about integrated pest management and organic solutions to protect your crops while maintaining environmental sustainability.',
         image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80',
         author: 'Sneha Patel',
-        date: 'March 14, 2024',
+        date: 'March 20, 2024',
         category: 'Pest Control'
     },
     {
@@ -34,7 +34,7 @@ const blogPosts: BlogPost[] = [
         excerpt: "Learn about the latest sustainable farming techniques that can help improve your yield while protecting the environment.",
         image: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80",
         author: "Akanshya Sapkota",
-        date: "2024-03-15",
+        date: "March 25, 2024",
         category: "Sustainability"
     },
 ];

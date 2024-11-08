@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { About, AdminDashboard, Blog, BlogPost, DiseaseDetection, Features, ForgotPassword, Home, Login, Register, VideoLibrary, } from "./pages"
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 function App() {
   const location = useLocation();
@@ -38,7 +40,9 @@ function App() {
 }
 
 export default () => (
-  <Router>
-    <App />
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
 );

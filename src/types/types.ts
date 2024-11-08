@@ -47,5 +47,36 @@ interface Post {
     likes: number;
     comments: Comment[];
 }
+interface User {
+    username: string;
+    email: string;
+    password: string;
+    fullName: string;
+    role: string | "user";
+    language: string;
+    bio: string;
+    avatar: File;
+    coverImage: File;
 
-export type { LucideIconName, Feature, BlogPost, Video, DetectionResultData, Post };
+}
+
+interface UserState {
+    user: User | null;
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+}
+
+interface Crop {
+    id: string;
+}
+
+interface CropState {
+    crops: Crop[];
+    selectedCrop: Crop | null;
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+}
+interface Response{
+    message: string;
+}
+export type { LucideIconName, Feature, BlogPost, Video, DetectionResultData, Post, User, UserState, Crop, CropState, Response };

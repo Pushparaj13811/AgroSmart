@@ -21,7 +21,7 @@ interface BlogPost {
 
 }
 interface Video {
-    id?: string;
+    _id?: string;
     thumbnail: string;
     title: string;
     videoUrl: string;
@@ -50,16 +50,16 @@ interface Post {
     comments: Comment[];
 }
 interface User {
-    id?: string;
+    _id?: string;
     username: string;
     email: string;
-    password: string;
+    password?: string;
     fullName: string;
     role: string | "user";
     language: string;
     bio: string;
-    avatar: File;
-    coverImage: File;
+    avatar: string;
+    coverImage: string;
 
 }
 
@@ -128,6 +128,10 @@ interface ProtectedRouteProps {
     adminOnly?: boolean;
 }
 
+interface FlowerSpinnerProps {
+    size?: number;
+    color?: string;
+}
 
 export type {
     LucideIconName,
@@ -145,5 +149,6 @@ export type {
     VideoData,
     ArticleState,
     VideoState,
-    ProtectedRouteProps
+    ProtectedRouteProps,
+    FlowerSpinnerProps
 };

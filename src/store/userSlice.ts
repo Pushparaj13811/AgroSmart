@@ -2,8 +2,9 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import * as userApi from '../api/userApi';
 import { User, UserState } from '../types/types';
 
-const initialState: UserState = {
-    user: null,
+const savedUser = localStorage.getItem('user');
+let state: UserState = {
+    user: savedUser ? JSON.parse(savedUser) : null,
     status: 'idle',
     error: null,
 };
@@ -14,7 +15,6 @@ export const userActions = {
     login: createAsyncThunk<User, { email: string; password: string }>('user/login', async ({ email, password }) => await userApi.login(email, password)),
     logout: createAsyncThunk<void>('user/logout', async () => {
         await userApi.logout();
-        return;
     }),
     getUser: createAsyncThunk<User>('user/getUser', async () => await userApi.getUser()),
     refreshToken: createAsyncThunk<User>('user/refreshToken', async () => await userApi.refreshAccessToken()),
@@ -29,7 +29,7 @@ export const userActions = {
 // Slice
 const userSlice = createSlice({
     name: 'user',
-    initialState,
+    initialState: state,
     reducers: {},
     extraReducers: (builder) =>
         builder
@@ -46,6 +46,7 @@ const userSlice = createSlice({
                     action.type.endsWith('/fulfilled') &&
                     action.type !== 'user/logout/fulfilled',
                 (state, action) => {
+                    localStorage.setItem('user', JSON.stringify(action.payload));
                     state.status = 'succeeded';
                     state.user = action.payload;
                 }

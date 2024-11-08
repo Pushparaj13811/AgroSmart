@@ -87,6 +87,9 @@ Here are some screenshots of the app:
 ![Image Upload](./src/assets/screenshots/image-upload.png)
 
 ![Analysing](./src/assets/screenshots/analysing.png)
+
+![Result](./src/assets/screenshots/result.png)
+
 ### About Page
 
 ![About Page](./src/assets/screenshots/About.png)

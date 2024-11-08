@@ -76,7 +76,38 @@ interface CropState {
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
 }
-interface Response{
+interface Response {
     message: string;
 }
-export type { LucideIconName, Feature, BlogPost, Video, DetectionResultData, Post, User, UserState, Crop, CropState, Response };
+
+interface Article {
+    id: string;
+    title: string;
+    content: string;
+}
+
+interface VideoData {
+    video: File;
+    thumbnail: File;
+    title: string;
+    description: string;
+    duration: string;
+    category: string;
+}
+
+
+export type {
+    LucideIconName,
+    Feature,
+    BlogPost,
+    Video,
+    DetectionResultData,
+    Post,
+    User,
+    UserState,
+    Crop,
+    CropState,
+    Response,
+    Article,
+    VideoData
+};

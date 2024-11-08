@@ -8,7 +8,7 @@ import { Feature, LucideIconName } from '../types/types';
 
 const Home = () => {
   const renderIcon = (iconName: LucideIconName) => {
-    const IconComponent = LucideIcons[iconName] as React.FC<{size?: number}>;
+    const IconComponent = LucideIcons[iconName] as React.FC<{ size?: number }>;
     return IconComponent ? <IconComponent size={24} /> : null;
   };
 
@@ -40,7 +40,7 @@ const Home = () => {
               </Link>
               <Link
                 to="/register"
-                className = "border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-700 transition duration-300"
+                className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-700 transition duration-300"
               >
                 Get Started Free
               </Link>
@@ -61,7 +61,7 @@ const Home = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature :Feature) => (
+            {features.map((feature: Feature) => (
               <FeatureCard
                 key={feature.title}
                 icon={renderIcon(feature.icon)}

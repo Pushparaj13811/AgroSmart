@@ -10,7 +10,7 @@ import ProtectedRoute from './services/protectedRoutes';
 function App() {
   const location = useLocation();
   useEffect(() => {
-    const pathName = location.pathname.replace("/", "") || "Home"; // Default to "Home" if root
+    const pathName = location.pathname.replace("/", "") || "Home"; 
     document.title = `AgroSmart - ${pathName.charAt(0).toUpperCase() + pathName.slice(1)}`;
   }, [location]);
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Camera, BookOpen, Video, Users, Shield, Leaf } from 'lucide-react';
 
 const Features = () => {

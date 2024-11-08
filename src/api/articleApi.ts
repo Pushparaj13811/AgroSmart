@@ -23,6 +23,11 @@ const getArticle = async (articleId: string) => {
 
 const createArticle = async (article: Article) => {
     try {
+        const formData = new FormData();
+        formData.append('title', article.title);
+        formData.append('content', article.content);
+        formData.append('image', article.image);
+        formData.append('category', article.category);
         const response = await axios.post(`${ApiUrl}/articles/create-article`, article);
         return response.data;
     } catch (error) {

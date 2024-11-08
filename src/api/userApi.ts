@@ -1,11 +1,12 @@
 import axios from 'axios';
+import api from '../services/api';
 import { User } from '../types/types';
 
 const ApiUrl = import.meta.env.VITE_BACKEND_URL;
 
 const register = async (user: User) => {
   try {
-    const response = await axios.post(`${ApiUrl}/users/register`, user);
+    const response = await axios.post(`${ApiUrl}/users/register`, user, { withCredentials: true });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -18,9 +19,8 @@ const register = async (user: User) => {
 
 const login = async (email: string, password: string) => {
   try {
-    const response = await axios.post(`${ApiUrl}/users/login`, { email, password });
-    return response.data;
-
+    const response = await axios.post(`${ApiUrl}/users/login`, { email, password }, { withCredentials: true });
+    return response.data.data.user;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       throw new Error(error.response.data.message || "Login failed due to an unknown error");
@@ -32,7 +32,7 @@ const login = async (email: string, password: string) => {
 
 const logout = async () => {
   try {
-    const response = await axios.post(`${ApiUrl}/users/logout`);
+    const response = await api.post(`${ApiUrl}/users/logout`);
     return response.data;
 
   } catch (error) {
@@ -46,7 +46,7 @@ const logout = async () => {
 
 const getUser = async () => {
   try {
-    const response = await axios.get(`${ApiUrl}/users/getuser`);
+    const response = await api.get(`${ApiUrl}/users/getuser`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -58,7 +58,7 @@ const getUser = async () => {
 }
 const refreshAccessToken = async () => {
   try {
-    const response = await axios.post(`${ApiUrl}/users/refreshtoken`);
+    const response = await api.post(`${ApiUrl}/users/refreshtoken`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -71,7 +71,7 @@ const refreshAccessToken = async () => {
 
 const changeCurrentPassword = async (oldPassword: string, newPassword: string) => {
   try {
-    const response = await axios.patch(`${ApiUrl}/users/changepassword`, { oldPassword, newPassword });
+    const response = await api.patch(`${ApiUrl}/users/changepassword`, { oldPassword, newPassword });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -86,7 +86,7 @@ const updateUserAvatar = async (avatar: File) => {
   try {
     const formData = new FormData();
     formData.append('avatar', avatar);
-    const response = await axios.patch(`${ApiUrl}/users/updateavatar`, formData);
+    const response = await api.patch(`${ApiUrl}/users/updateavatar`, formData);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -101,7 +101,7 @@ const updateUserCoverImage = async (coverImage: File) => {
   try {
     const formData = new FormData();
     formData.append('coverImage', coverImage);
-    const response = await axios.patch(`${ApiUrl}/users/updatecoverimage`, formData);
+    const response = await api.patch(`${ApiUrl}/users/updatecoverimage`, formData);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -114,7 +114,7 @@ const updateUserCoverImage = async (coverImage: File) => {
 
 const updateUserProfile = async (user: User) => {
   try {
-    const response = await axios.patch(`${ApiUrl}/users/updateaccount`, user);
+    const response = await api.patch(`${ApiUrl}/users/updateaccount`, user);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -127,7 +127,7 @@ const updateUserProfile = async (user: User) => {
 
 const updateUserLanguage = async (language: string) => {
   try {
-    const response = await axios.patch(`${ApiUrl}/users/updatelanguage`, { language });
+    const response = await api.patch(`${ApiUrl}/users/updatelanguage`, { language });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -140,7 +140,7 @@ const updateUserLanguage = async (language: string) => {
 
 const updateUserBio = async (bio: string) => {
   try {
-    const response = await axios.patch(`${ApiUrl}/users/updatebio`, { bio });
+    const response = await api.patch(`${ApiUrl}/users/updatebio`, { bio });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {

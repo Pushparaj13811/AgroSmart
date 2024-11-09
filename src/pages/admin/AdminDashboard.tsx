@@ -4,6 +4,8 @@ import DashboardOverview from '../../components/admin/DashboardOverview';
 import BlogManagement from '../../components/admin/BlogManagement';
 import VideoManagement from '../../components/admin/VideoManagement';
 import Setting from '../../components/admin/Setting';
+import CreateBlog from '../../components/admin/CreateBlog';
+import VideoUpload from '../../components/admin/VideoUpload';
 
 const AdminDashboard = () => {
   return (
@@ -59,6 +61,11 @@ const AdminDashboard = () => {
             <Route path="/" element={<DashboardOverview />} />
             <Route path="/blog" element={<BlogManagement />} />
             <Route path="/videos" element={<VideoManagement />} />
+            <Route path="/create-blog" element={<CreateBlog onSave={() => {
+              // Handle save logic here
+              console.log('Blog saved');
+            }} />} />
+            <Route path="/upload-video" element={<VideoUpload />} />
             <Route path="/settings" element={<Setting />} />
           </Routes>
         </main>

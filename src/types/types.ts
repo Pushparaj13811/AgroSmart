@@ -4,6 +4,11 @@ import { ReactNode } from 'react';
 
 type LucideIconName = keyof typeof LucideIcons;
 
+type ValidateAccessTokenResponse = {
+    isValid: boolean;
+    message: string;
+};
+
 interface Feature {
     icon: LucideIconName;
     title: string;
@@ -49,6 +54,21 @@ interface Post {
     likes: number;
     comments: Comment[];
 }
+
+// ... existing code ...
+
+export interface RegisterFormData {
+    username: string;
+    email: string;
+    password: string;
+    fullName: string;
+    role: string;
+    language: string;
+    bio: string;
+    avatar: File;
+    coverImage: File | "";
+}
+
 interface User {
     _id?: string;
     username: string;
@@ -58,9 +78,8 @@ interface User {
     role: string | "user";
     language: string;
     bio: string;
-    avatar: string;
-    coverImage: string;
-
+    avatar: string | File;
+    coverImage?: string | File;
 }
 
 interface UserState {
@@ -133,8 +152,50 @@ interface FlowerSpinnerProps {
     color?: string;
 }
 
+type TabButtonProps = {
+    tab: string;
+    current: string;
+    icon: React.ComponentType<{ size?: string | number }>;
+    label: string;
+};
+
+type FormDataType = {
+    username: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    fullName: string;
+    role: string;
+    language: string;
+    bio: string;
+    [key: string]: string;
+};
+
+interface Blog {
+    title: string;
+    content: string;
+}
+
+
+declare module 'lucide-react' {
+    export type Camera = any;
+    export type MapPin = any;
+    export type Crop = any;
+    export type Settings = any;
+    export type ChevronRight = any;
+    export type Edit2 = any;
+    export type Droplets = any;
+    export type Sun = any;
+    export type TrendingUp = any;
+    export type AlertTriangle = any;
+    export type LineChart = any;
+    export type Thermometer = any;
+    export type ShieldCheck = any;
+}
+
 export type {
     LucideIconName,
+    ValidateAccessTokenResponse,
     Feature,
     BlogPost,
     Video,
@@ -150,5 +211,8 @@ export type {
     ArticleState,
     VideoState,
     ProtectedRouteProps,
-    FlowerSpinnerProps
+    FlowerSpinnerProps,
+    TabButtonProps,
+    FormDataType,
+    Blog
 };

@@ -18,18 +18,12 @@ const Navbar = () => {
     const response = await dispatch(userActions.logout());
 
     if (userActions.logout.fulfilled.match(response)) {
-
       localStorage.removeItem('user');
-
       navigate('/');
     } else {
       console.error('Logout failed:', response.payload || response.error.message);
     }
   };
-
-
-
-
   return (
     <nav className="bg-green-700 text-white top-0 sticky shadow-lg z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,9 +37,24 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="hover:text-green-200 transition">Home</Link>
-            <Link to="/about" className="hover:text-green-200 transition">About</Link>
-            <Link to="/features" className="hover:text-green-200 transition">Features</Link>
+
+            {user && user.role === 'admin' && (
+              <Link to="/admin" className="hover:text-green-200 transition">Admin</Link>
+            )}
+            {
+              user ? (
+                <>
+                  <Link to="/" className="hover:text-green-200 transition">Profile</Link>
+                  <Link to="/detect" className="hover:text-green-200 transition">Detect</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/" className="hover:text-green-200 transition">Home</Link>
+                  <Link to="/about" className="hover:text-green-200 transition">About</Link>
+                  <Link to="/features" className="hover:text-green-200 transition">Features</Link>
+                </>
+              )
+            }
             <Link to="/blog" className="hover:text-green-200 transition">Blog</Link>
             <Link to="/videos" className="hover:text-green-200 transition">Videos</Link>
             {user ? (
@@ -67,22 +76,24 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div >
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/" className="block px-3 py-2 hover:bg-green-600 rounded-md">Home</Link>
-            <Link to="/about" className="block px-3 py-2 hover:bg-green-600 rounded-md">About</Link>
-            <Link to="/features" className="block px-3 py-2 hover:bg-green-600 rounded-md">Features</Link>
-            <Link to="/blog" className="block px-3 py-2 hover:bg-green-600 rounded-md">Blog</Link>
-            <Link to="/videos" className="block px-3 py-2 hover:bg-green-600 rounded-md">Videos</Link>
-            <Link to="/login" className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">Login</Link>
+      {
+        isOpen && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <Link to="/" className="block px-3 py-2 hover:bg-green-600 rounded-md">Home</Link>
+              <Link to="/about" className="block px-3 py-2 hover:bg-green-600 rounded-md">About</Link>
+              <Link to="/features" className="block px-3 py-2 hover:bg-green-600 rounded-md">Features</Link>
+              <Link to="/blog" className="block px-3 py-2 hover:bg-green-600 rounded-md">Blog</Link>
+              <Link to="/videos" className="block px-3 py-2 hover:bg-green-600 rounded-md">Videos</Link>
+              <Link to="/login" className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">Login</Link>
+            </div>
           </div>
-        </div>
-      )}
-    </nav>
+        )
+      }
+    </nav >
   );
 }
 

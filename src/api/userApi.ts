@@ -69,6 +69,19 @@ const refreshAccessToken = async () => {
   }
 }
 
+const validateAccessToken = async () => {
+  try {
+    const response = await api.post(`${ApiUrl}/users/validateaccesstoken`)
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.message) {
+      throw new Error(error.response?.data.message || "An error occured while validating access token")
+    } else {
+      throw new Error("An unexpected error occured. Please try again.")
+    }
+  }
+}
+
 const changeCurrentPassword = async (oldPassword: string, newPassword: string) => {
   try {
     const response = await api.patch(`${ApiUrl}/users/changepassword`, { oldPassword, newPassword });
@@ -157,6 +170,7 @@ export {
   logout,
   getUser,
   refreshAccessToken,
+  validateAccessToken,
   changeCurrentPassword,
   updateUserAvatar,
   updateUserCoverImage,

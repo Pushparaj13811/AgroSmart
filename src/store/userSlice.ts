@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import * as userApi from '../api/userApi';
-import { User, UserState } from '../types/types';
+import { RegisterFormData, User, UserState, ValidateAccessTokenResponse } from '../types/types';
 
 const savedUser = localStorage.getItem('user');
 let state: UserState = {
@@ -11,13 +11,14 @@ let state: UserState = {
 
 // Async actions
 export const userActions = {
-    register: createAsyncThunk<User, User>('user/register', async (user) => await userApi.register(user)),
+    register: createAsyncThunk<User, RegisterFormData>('user/register', async (user) => await userApi.register(user)),
     login: createAsyncThunk<User, { email: string; password: string }>('user/login', async ({ email, password }) => await userApi.login(email, password)),
     logout: createAsyncThunk<void>('user/logout', async () => {
         await userApi.logout();
     }),
     getUser: createAsyncThunk<User>('user/getUser', async () => await userApi.getUser()),
     refreshToken: createAsyncThunk<User>('user/refreshToken', async () => await userApi.refreshAccessToken()),
+    validateAccessToken: createAsyncThunk<ValidateAccessTokenResponse, void>('user/validateAccessToken', async () => await userApi.validateAccessToken()),
     changePassword: createAsyncThunk<User, { oldPassword: string; newPassword: string }>('user/changePassword', async ({ oldPassword, newPassword }) => await userApi.changeCurrentPassword(oldPassword, newPassword)),
     updateAvatar: createAsyncThunk<User, File>('user/updateAvatar', async (avatar) => await userApi.updateUserAvatar(avatar)),
     updateCoverImage: createAsyncThunk<User, File>('user/updateCoverImage', async (coverImage) => await userApi.updateUserCoverImage(coverImage)),

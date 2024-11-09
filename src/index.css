@@ -11,6 +11,9 @@
     body {
       @apply text-gray-800 antialiased;
     }
+  :root {
+        --radius: 0.5rem;
+    }
   }
   
   @layer components {

@@ -25,8 +25,9 @@ const Login = () => {
         password: formData.password
       })
     )
+    
     if (userActions.login.fulfilled.match(resultAction)) {
-      navigate('/profile');
+      navigate('/');
     } else {
       console.error('Login failed:', resultAction.payload || resultAction.error.message);
     }

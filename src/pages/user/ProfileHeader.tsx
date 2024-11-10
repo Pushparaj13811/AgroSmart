@@ -1,8 +1,18 @@
-import { Crop, Edit2, LineChart, Settings, TrendingUp } from "lucide-react"
+import { useState } from 'react';
+import { Crop, Edit2, LineChart, Settings, TrendingUp, Camera } from "lucide-react"
 import TabButton from "../../components/ui/TabButton"
 import ProfileInfo from "../../components/ui/ProfileInfo"
-
+import EditProfilePictureModal from "../../components/EditProfilePictureModal"
 function ProfileHeader({ name, avatar, bio, location, experience, certifications, activeTab, setActiveTab }: { name: string, avatar: string, bio: string, location: string, experience: string, certifications: string[], activeTab: string, setActiveTab: (tab: string) => void }) {
+
+    const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
+
+    const handleEditProfilePicture = () => {
+        // Open the modal
+        setIsAvatarModalOpen(true);
+
+    }
+
     return (
         <div className="relative px-4 md:px-8 -mt-32">
             <div className="max-w-7xl mx-auto">
@@ -16,7 +26,7 @@ function ProfileHeader({ name, avatar, bio, location, experience, certifications
                                     alt={name}
                                     className="w-full h-full object-cover"
                                 />
-                                <button className="absolute bottom-2 right-2 bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors shadow-lg">
+                                <button onClick={handleEditProfilePicture} className="absolute bottom-2 right-2 bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors shadow-lg">
                                     <Edit2 size={16} />
                                 </button>
                             </div>
@@ -65,6 +75,13 @@ function ProfileHeader({ name, avatar, bio, location, experience, certifications
                     </div>
                 </div>
             </div>
+
+            {/* Modals */}
+            <EditProfilePictureModal
+                isOpen={isAvatarModalOpen}
+                onClose={() => setIsAvatarModalOpen(false)}
+                type="avatar"
+            />
         </div>
 
     )

@@ -16,9 +16,11 @@ const Navbar = () => {
     e.preventDefault();
 
     const response = await dispatch(userActions.logout());
+    console.log("From navbar : ",response)
 
     if (userActions.logout.fulfilled.match(response)) {
       localStorage.removeItem('user');
+      localStorage.removeItem('userProfile');
       navigate('/');
     } else {
       console.error('Logout failed:', response.payload || response.error.message);

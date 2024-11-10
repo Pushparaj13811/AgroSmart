@@ -1,6 +1,6 @@
 import axios from 'axios';
 import api from '../services/api';
-import { User } from '../types/types';
+import { User, UserProfileResponse } from '../types/types';
 
 const ApiUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -56,6 +56,18 @@ const getUser = async () => {
     }
   }
 }
+
+const getUserProfile = async () => {
+  try {
+    const response = await api.get(`${ApiUrl}/users/getuserprofile`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.message || "An error occurred while fetching user profile");
+    }
+  }
+}
+
 const refreshAccessToken = async () => {
   try {
     const response = await api.post(`${ApiUrl}/users/refreshtoken`);
@@ -125,9 +137,22 @@ const updateUserCoverImage = async (coverImage: File) => {
   }
 }
 
-const updateUserProfile = async (user: User) => {
+const updateAccount = async (user: User) => {
   try {
     const response = await api.patch(`${ApiUrl}/users/updateaccount`, user);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.message || "An error occurred while updating the user profile");
+    } else {
+      throw new Error("An unexpected error occurred. Please try again.");
+    }
+  }
+}
+
+const updateUserProfile = async (user: UserProfileResponse) => {
+  try {
+    const response = await api.patch(`${ApiUrl}/users/updateuserprofile`, user);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -169,6 +194,7 @@ export {
   login,
   logout,
   getUser,
+  getUserProfile,
   refreshAccessToken,
   validateAccessToken,
   changeCurrentPassword,
@@ -176,5 +202,6 @@ export {
   updateUserCoverImage,
   updateUserProfile,
   updateUserLanguage,
-  updateUserBio
+  updateUserBio,
+  updateAccount
 };

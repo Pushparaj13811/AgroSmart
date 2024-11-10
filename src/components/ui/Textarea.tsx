@@ -3,6 +3,7 @@ import React from 'react';
 
 type TextareaProps = {
     id: string;
+    name: string;
     value: string;
     onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     placeholder?: string;
@@ -12,6 +13,7 @@ type TextareaProps = {
 
 const Textarea: React.FC<TextareaProps> = ({
     id,
+    name,
     value,
     onChange,
     placeholder = '',
@@ -21,11 +23,12 @@ const Textarea: React.FC<TextareaProps> = ({
     return (
         <textarea
             id={id}
+            name={name}
             value={value}
             onChange={onChange}
             placeholder={placeholder}
             rows={rows}
-            className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 ${className}`}
+            className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${className}`}
         />
     );
 };

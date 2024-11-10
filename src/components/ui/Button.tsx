@@ -3,6 +3,7 @@ import React from 'react';
 
 type ButtonProps = {
     type?: 'button' | 'submit' | 'reset';
+    disabled?: boolean;
     onClick?: () => void;
     className?: string;
     children: React.ReactNode;
@@ -12,6 +13,7 @@ type ButtonProps = {
 
 const Button: React.FC<ButtonProps> = ({
     type = 'button',
+    disabled = false,
     onClick,
     className = '',
     children,
@@ -33,7 +35,8 @@ const Button: React.FC<ButtonProps> = ({
         <button
             type={type}
             onClick={onClick}
-            className={`${variantClasses} ${sizeClasses} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 ${className}`}
+            disabled={disabled}
+            className={`${variantClasses} ${sizeClasses} rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${className}`}
         >
             {children}
         </button>

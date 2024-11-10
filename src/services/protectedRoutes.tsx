@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AppDispatch, RootState } from '../store/store';
-import LoadingSpinner from '../components/LoadingSpinner';
 import { ProtectedRouteProps } from '../types/types';
 import { userActions } from '../store/userSlice';
 import FlowerSpinner from '../components/FlowerSpinner';
@@ -37,7 +36,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, adminOnly = f
         if (!user || !isValidToken) {
             navigate('/login', { replace: true });
         } else if (adminOnly && user.role !== 'admin') {
-            navigate('/profile', { replace: true });
+            navigate('/', { replace: true });
         }
     }, [user, status, isTokenValid, adminOnly, navigate, isValidToken]);
 

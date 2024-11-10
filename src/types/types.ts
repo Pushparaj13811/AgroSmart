@@ -55,7 +55,6 @@ interface Post {
     comments: Comment[];
 }
 
-// ... existing code ...
 
 export interface RegisterFormData {
     username: string;
@@ -71,19 +70,47 @@ export interface RegisterFormData {
 
 interface User {
     _id?: string;
-    username: string;
-    email: string;
+    username?: string;
+    email?: string;
     password?: string;
-    fullName: string;
-    role: string | "user";
-    language: string;
-    bio: string;
-    avatar: string | File;
+    fullName?: string;
+    role?: string | "user";
+    language?: string;
+    bio?: string;
+    avatar?: string | File;
     coverImage?: string | File;
+    data?: {
+        language?: string;
+        bio?: string;
+        avatar?: string;
+        coverImage?: string;
+    }
+}
+
+interface UserProfile extends User {
+    status?: 'idle' | 'loading' | 'succeeded' | 'failed';
+    title?: string;
+    location?: string;
+    certifications?: string[];
+    primaryCrops?: string[];
+    experience?: string;
+    farmSize?: string;
+    lastSoilTest?: string;
+    activeSubscription?: string;
+    soilHealth?: number;
+    waterEfficiency?: number;
+    yieldForecast?: number;
+    sustainability?: number;
+    recentActivities?: { date: string; activity: string; status: string }[];
+    equipment?: { name: string; status: string; lastMaintenance: string }[];
+}
+interface UserProfileResponse extends UserProfile {
+    message?: UserProfile;
 }
 
 interface UserState {
     user: User | null;
+    userProfile: UserProfileResponse | null;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
 }
@@ -192,6 +219,11 @@ declare module 'lucide-react' {
     export type Thermometer = any;
     export type ShieldCheck = any;
 }
+interface AccountData {
+    fullName: string;
+    email: string;
+    username: string;
+}
 
 export type {
     LucideIconName,
@@ -203,6 +235,8 @@ export type {
     Post,
     User,
     UserState,
+    UserProfile,
+    UserProfileResponse,
     Crop,
     CropState,
     Response,
@@ -214,5 +248,6 @@ export type {
     FlowerSpinnerProps,
     TabButtonProps,
     FormDataType,
-    Blog
+    Blog,
+    AccountData
 };

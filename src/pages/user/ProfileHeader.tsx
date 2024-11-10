@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Crop, Edit2, LineChart, Settings, TrendingUp, Camera } from "lucide-react"
+import { Crop, Edit2, LineChart, Settings, TrendingUp} from "lucide-react"
 import TabButton from "../../components/ui/TabButton"
 import ProfileInfo from "../../components/ui/ProfileInfo"
 import EditProfilePictureModal from "../../components/EditProfilePictureModal"

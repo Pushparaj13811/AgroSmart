@@ -12,9 +12,9 @@ import { Alert, AlertDescription } from '../../components/ui/alert';
 import { Link } from 'react-router-dom';
 import PageTransition from '../../components/ui/PageTransition';
 import { userActions } from '../../store/userSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store/store';
-import { AccountData, User, UserProfileResponse } from '../../types/types';
+import { useDispatch } from 'react-redux';
+import { AppDispatch} from '../../store/store';
+import { AccountData, UserProfileResponse } from '../../types/types';
 import CustomDropdown from '../../components/ui/CustomDropdown';
 
 
@@ -136,8 +136,6 @@ const ProfileUpdateForm = () => {
         if (!originalData) return { accountChanged: false, profileChanged: false };
 
         const accountFields: (keyof AccountData)[] = ['fullName', 'email', 'username'];
-        const bioFields: (keyof Bio)[] = ['bio'];
-        const languageFields: (keyof Language)[] = ['language'];
         const accountChanges: Partial<AccountData> = {};
         const bioChanges: Partial<Bio> = {};
         const languageChanges: Partial<Language> = {};

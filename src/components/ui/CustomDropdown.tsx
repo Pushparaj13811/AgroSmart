@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Check, ChevronDown } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
@@ -69,7 +69,7 @@ const CustomDropdown = ({
                         {options.map((option) => (
                             <button
                                 key={option.value}
-                                name={option.value}
+                                name={name}
                                 type="button"
                                 className={cn(
                                     "flex items-center justify-between px-3 py-3",

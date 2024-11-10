@@ -1,4 +1,5 @@
-import { MapPin, ShieldCheck } from 'lucide-react';
+import { Edit2, MapPin, ShieldCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 function ProfileInfo({ name, bio, location, experience, certifications }: { name: string, bio: string, location: string, experience: string, certifications: string[] }) {
     return (
         <div className="flex-grow">
@@ -12,7 +13,9 @@ function ProfileInfo({ name, bio, location, experience, certifications }: { name
                         <span className="text-gray-300">|</span>
                         <span>{experience}</span>
                     </div>
+
                 </div>
+
                 <div className="flex flex-wrap gap-2">
                     {certifications.map(cert => (
                         <span key={cert} className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
@@ -21,6 +24,9 @@ function ProfileInfo({ name, bio, location, experience, certifications }: { name
                         </span>
                     ))}
                 </div>
+                <Link to="/update-profile" className="bottom-2 right-2 bg-green-600 hover:bg-green-700 text-white p-2 rounded-full transition-colors shadow-lg">
+                    <Edit2 size={16} />
+                </Link>
             </div>
         </div>
     )

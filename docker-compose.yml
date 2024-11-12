@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: agrosmart-frontend
+    ports:
+      - 5173:5173
+    volumes:
+      - .:/app
+      - /app/node_modules
+    working_dir: /app
+    command: ["npm", "run", "dev"]

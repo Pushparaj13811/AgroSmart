@@ -1,29 +1,19 @@
-FROM oven/bun:1 AS builder
+FROM node:20-alpine
+
+# Install required dependencies for building native modules
+RUN apk add --no-cache bash curl python3 make g++
 
 WORKDIR /app
 
-COPY package*.json bun.lockb ./
+# Copy package.json files to install dependencies
+COPY package*.json ./
+RUN npm install
 
-RUN bun install --frozen-lockfile
-
+# Copy all application files
 COPY . .
 
-RUN bun run build
+# Expose the port your app runs on
+EXPOSE 5173
 
-FROM node:20-alpine AS runner
-
-WORKDIR /app
-
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/bun.lockb ./
-
-RUN curl -fsSL https://bun.sh/install | bash
-
-ENV PATH="/root/.bun/bin:$PATH"
-
-RUN bun install --production --frozen-lockfile
-
-EXPOSE 4173
-
-CMD ["npx", "serve", "dist"]
+# Run the app in dev mode
+CMD ["npm", "run", "dev"]

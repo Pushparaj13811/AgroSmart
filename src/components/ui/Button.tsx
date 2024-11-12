@@ -7,7 +7,7 @@ type ButtonProps = {
     onClick?: () => void;
     className?: string;
     children: React.ReactNode;
-    variant?: 'default' | 'ghost' | 'outline'; // You can customize this further
+    variant?: 'default' | 'ghost' | 'outline';
     size?: 'sm' | 'md' | 'lg';
 };
 

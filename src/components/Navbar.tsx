@@ -4,8 +4,11 @@ import { Menu, X, Sprout } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store/store';
 import { userActions } from '../store/userSlice';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './locale/LanguageSwitcher';
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const user = useSelector((state: RootState) => state.user.user);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
@@ -16,7 +19,6 @@ const Navbar = () => {
     e.preventDefault();
 
     const response = await dispatch(userActions.logout());
-    console.log("From navbar : ",response)
 
     if (userActions.logout.fulfilled.match(response)) {
       localStorage.removeItem('user');
@@ -41,31 +43,33 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
 
             {user && user.role === 'admin' && (
-              <Link to="/admin" className="hover:text-green-200 transition">Admin</Link>
+              <Link to="/admin" className="hover:text-green-200 transition">{t('navbar.admin')}</Link>
             )}
             {
               user ? (
                 <>
-                  <Link to="/" className="hover:text-green-200 transition">Profile</Link>
-                  <Link to="/detect" className="hover:text-green-200 transition">Detect</Link>
+                  <Link to="/" className="hover:text-green-200 transition">{t('navbar.profile')}</Link>
+                  <Link to="/detect" className="hover:text-green-200 transition">{t('navbar.detect')}</Link>
                 </>
               ) : (
                 <>
-                  <Link to="/" className="hover:text-green-200 transition">Home</Link>
-                  <Link to="/about" className="hover:text-green-200 transition">About</Link>
-                  <Link to="/features" className="hover:text-green-200 transition">Features</Link>
+                  <Link to="/" className="hover:text-green-200 transition">{t('navbar.home')}</Link>
+                  <Link to="/about" className="hover:text-green-200 transition">{t('navbar.about')}</Link>
+                  <Link to="/features" className="hover:text-green-200 transition">{t('navbar.features')}</Link>
                 </>
               )
             }
-            <Link to="/blog" className="hover:text-green-200 transition">Blog</Link>
-            <Link to="/videos" className="hover:text-green-200 transition">Videos</Link>
+            <Link to="/blog" className="hover:text-green-200 transition">{t('navbar.blog')}</Link>
+            <Link to="/videos" className="hover:text-green-200 transition">{t('navbar.videos')}</Link>
             {user ? (
-              <button onClick={handleLogout} className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">Logout</button>
+              <button onClick={handleLogout} className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">{t('navbar.logout')}</button>
             ) : (
               <Link to="/login" className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">
-                Login
+                {t('navbar.login')}
               </Link>
             )}
+            {/* Language Switcher */}
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile menu button */}
@@ -85,12 +89,12 @@ const Navbar = () => {
         isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link to="/" className="block px-3 py-2 hover:bg-green-600 rounded-md">Home</Link>
-              <Link to="/about" className="block px-3 py-2 hover:bg-green-600 rounded-md">About</Link>
-              <Link to="/features" className="block px-3 py-2 hover:bg-green-600 rounded-md">Features</Link>
-              <Link to="/blog" className="block px-3 py-2 hover:bg-green-600 rounded-md">Blog</Link>
-              <Link to="/videos" className="block px-3 py-2 hover:bg-green-600 rounded-md">Videos</Link>
-              <Link to="/login" className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">Login</Link>
+              <Link to="/" className="block px-3 py-2 hover:bg-green-600 rounded-md">{t('navbar.home')}</Link>
+              <Link to="/about" className="block px-3 py-2 hover:bg-green-600 rounded-md">{t('navbar.about')}</Link>
+              <Link to="/features" className="block px-3 py-2 hover:bg-green-600 rounded-md">{t('navbar.features')}</Link>
+              <Link to="/blog" className="block px-3 py-2 hover:bg-green-600 rounded-md">{t('navbar.blog')}</Link>
+              <Link to="/videos" className="block px-3 py-2 hover:bg-green-600 rounded-md">{t('navbar.videos')}</Link>
+              <Link to="/login" className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">{t('navbar.login')}</Link>
             </div>
           </div>
         )

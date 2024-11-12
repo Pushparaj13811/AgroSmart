@@ -9,8 +9,8 @@ import ForgotPassword from "./auth/ForgotPassword";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import AdminDashboard from "./admin/AdminDashboard";
-import UserProfile from "./user/UserProfile";
-
+import ProfilePage from "./user/ProfilePage";
+import ProfileUpdateForm from "./user/ProfileUpdateForm";
 export {
     Home,
     About,
@@ -23,5 +23,7 @@ export {
     Login,
     Register,
     AdminDashboard,
-    UserProfile
+    ProfileUpdateForm,
+    ProfilePage
+
 };

@@ -16,7 +16,7 @@ import PageTransition from '../../components/ui/PageTransition';
 import AnimatedList from '../../components/ui/AnimatedList';
 
 
-const UserProfile = () => {
+const ProfilePage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const user = useSelector((state: RootState) => state.user.user) as User;
     const userDetails = useSelector((state: RootState) => state.user.userProfile?.message) as UserProfileResponse;
@@ -258,4 +258,4 @@ const UserProfile = () => {
     );
 };
 
-export default UserProfile;
+export default ProfilePage;

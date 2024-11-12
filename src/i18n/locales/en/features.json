@@ -1,0 +1,34 @@
+{
+  "features_header": {
+    "title": "Features that Empower Farmers",
+    "description": "Discover the tools and resources that make AgroSmart your complete farming companion"
+  },
+  "disease_detection": {
+    "title": "Disease Detection",
+    "description": "Upload photos of your crops to instantly identify diseases and get treatment recommendations."
+  },
+  "image_analysis": {
+    "title": "Image Analysis",
+    "description": "Advanced AI-powered analysis for accurate crop health assessment"
+  },
+  "expert_articles": {
+    "title": "Expert Articles",
+    "description": "Access a vast library of articles written by agricultural experts and researchers."
+  },
+  "video_tutorials": {
+    "title": "Video Tutorials",
+    "description": "Learn through comprehensive video guides covering various farming techniques."
+  },
+  "community_support": {
+    "title": "Community Support",
+    "description": "Connect with other farmers, share experiences, and learn from each other."
+  },
+  "data_security": {
+    "title": "Data Security",
+    "description": "Your farming data is securely stored and protected with industry-standard encryption."
+  },
+  "sustainable_practices": {
+    "title": "Sustainable Practices",
+    "description": "Learn about eco-friendly farming methods that benefit both yields and the environment."
+  }
+}

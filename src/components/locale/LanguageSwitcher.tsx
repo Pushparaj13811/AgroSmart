@@ -16,8 +16,12 @@ const LanguageSwitcher = () => {
                 language = 'English';
             } else if (lang === 'hi') {
                 language = 'हिन्दी';
-            } else {
+            } else if (lang === 'ne') {
                 language = 'नेपाली';
+            } else if (lang === 'gu') {
+                language = 'ગુજરાતી';
+            } else {
+                language = 'भोजपुरी';
             }
             setSelectedLanguage(language);
         } else {
@@ -42,7 +46,7 @@ const LanguageSwitcher = () => {
                         <Button
                             variant="ghost"
                             size='sm'
-                            className="w-full text-left text-black hover:bg-green-500 hover:text-white"
+                            className="w-full text-left hover:bg-green-500 hover:text-white"
                             onClick={() => changeLanguage('en')}
                         >
                             English
@@ -50,7 +54,7 @@ const LanguageSwitcher = () => {
                         <Button
                             variant="ghost"
                             size='sm'
-                            className="w-full text-left text-black hover:bg-green-500 hover:text-white"
+                            className="w-full text-left  hover:bg-green-500 hover:text-white"
                             onClick={() => changeLanguage('hi')}
                         >
                             हिन्दी
@@ -58,10 +62,26 @@ const LanguageSwitcher = () => {
                         <Button
                             variant="ghost"
                             size='sm'
-                            className="w-full text-left text-black hover:bg-green-500 hover:text-white"
+                            className="w-full text-left  hover:bg-green-500 hover:text-white"
                             onClick={() => changeLanguage('ne')}
                         >
                             नेपाली
+                        </Button>
+                        <Button
+                            variant="ghost"
+                            size='sm'
+                            className="w-full text-left  hover:bg-green-500 hover:text-white"
+                            onClick={() => changeLanguage('gu')}
+                        >
+                            ગુજરાતી
+                        </Button>
+                        <Button
+                            variant="ghost"
+                            size='sm'
+                            className="w-full text-left  hover:bg-green-500 hover:text-white"
+                            onClick={() => changeLanguage('bho')}
+                        >
+                            भोजपुरी
                         </Button>
                     </CardContent>
                 </Card>

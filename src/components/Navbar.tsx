@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from '../store/store';
 import { userActions } from '../store/userSlice';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './locale/LanguageSwitcher';
+import Button from './ui/Button';
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -64,8 +65,16 @@ const Navbar = () => {
             {user ? (
               <button onClick={handleLogout} className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">{t('navbar.logout')}</button>
             ) : (
-              <Link to="/login" className="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-md">
-                {t('navbar.login')}
+              <Link to="/login">
+                <Button
+                  variant="default"
+                  size='sm'
+                  className="px-4 py-2 rounded-md shadow-md bg-green-600 text-white hover:bg-green-500 focus:outline-none"
+                >
+
+                  {t('navbar.login')}
+
+                </Button>
               </Link>
             )}
             {/* Language Switcher */}

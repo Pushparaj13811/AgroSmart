@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader } from '../../components/ui/Card';
 import ProgressBar from '../../components/ui/ProgressBar';
 import ProfileHero from '../../components/ui/ProfileHero';
 import ProfileHeader from './ProfileHeader';
-import type { User, UserProfile, UserProfileResponse } from '../../types/types';
+import type { User, UserProfileResponse } from '../../types/types';
 import { userActions } from '../../store/userSlice';
 import PageTransition from '../../components/ui/PageTransition';
 import AnimatedList from '../../components/ui/AnimatedList';

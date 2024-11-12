@@ -1,0 +1,25 @@
+{
+  "footer": {
+    "about": {
+      "title": "About AgroSmart",
+      "description": "Empowering farmers with smart technology and reliable information for better agriculture."
+    },
+    "quick_links": {
+      "title": "Quick Links",
+      "about_us": "About Us",
+      "features": "Features",
+      "contact": "Contact"
+    },
+    "resources": {
+      "title": "Resources",
+      "blog": "Blog",
+      "videos": "Videos",
+      "faq": "FAQ"
+    },
+    "connect": {
+      "title": "Connect"
+    },
+    "made_with": "Made with",
+    "for_farmers": "for farmers worldwide"
+  }
+}

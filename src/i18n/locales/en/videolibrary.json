@@ -1,0 +1,14 @@
+{
+  "educational_videos": {
+    "title": "Educational Videos",
+    "description": "Learn farming techniques from expert demonstrations"
+  },
+  "categories": [
+    "All",
+    "Water Management",
+    "Pest Control",
+    "Soil Health",
+    "Harvesting"
+  ],
+  "search_videos": "Search videos..."
+}

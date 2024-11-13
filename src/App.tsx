@@ -6,6 +6,7 @@ import { Provider, useSelector } from 'react-redux';
 import store, { RootState } from './store/store';
 import ProtectedRoute from './services/protectedRoutes';
 import { AnimatePresence } from 'framer-motion';
+import VideoPage from './pages/video/VideoPage';
 
 // Lazy load components individually from pages/index.ts
 const About = lazy(() => import('./pages').then(module => ({ default: module.About })));
@@ -54,9 +55,16 @@ function App() {
                   <ProfileUpdateForm />
                 </ProtectedRoute>
               } />
+
+              {/* Blog */}
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogPost />} />
+
+              {/* Videos */}
               <Route path="/videos" element={<VideoLibrary />} />
+              <Route path="/videos/:id" element={<VideoPage publicId={location.pathname.split('/').pop() || ''} />} />
+
+              {/* Auth routes */}
 
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

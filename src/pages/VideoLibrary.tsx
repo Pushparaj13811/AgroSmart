@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { Search } from 'lucide-react';
 import videos from '../constants/Videos';
-import VideoCard from '../components/Videos/VideoCard';
+import VideoCard from '../components/ui/VideoCard';
+import { useNavigate } from 'react-router-dom';
 
 const VideoLibrary = () => {
+  const navigate = useNavigate();
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const categories = ['All', 'Water Management', 'Pest Control', 'Soil Health', 'Harvesting'];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Educational Videos
@@ -48,12 +51,14 @@ const VideoLibrary = () => {
       </div>
 
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {videos.map((video) => (
-            <VideoCard key={video.id} video={video} />
-          ))}
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-8 x">
+        {videos.map((video) => (
+          <VideoCard
+            key={video.id}
+            video={video}
+            onClick={() => navigate(`/videos/${video.id}`)}
+          />
+        ))}
       </div>
     </div>
   );

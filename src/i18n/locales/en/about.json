@@ -1,0 +1,33 @@
+{
+  "about": {
+    "heading": "About AgroSmart",
+    "description": "We're on a mission to revolutionize farming through technology, making sustainable agriculture accessible to farmers worldwide."
+  },
+  "mission": {
+    "heading": "Our Mission",
+    "description": "AgroSmart combines cutting-edge technology with agricultural expertise to help farmers make informed decisions, increase yields, and practice sustainable farming.",
+    "list": [
+      "Empower farmers with data-driven insights",
+      "Promote sustainable farming practices",
+      "Make expert knowledge accessible",
+      "Build a community of modern farmers"
+    ]
+  },
+  "values": {
+    "heading": "Our Values",
+    "list": [
+      {
+        "title": "Trust & Reliability",
+        "description": "We provide accurate, scientifically-backed information you can rely on."
+      },
+      {
+        "title": "Community First",
+        "description": "We believe in the power of knowledge sharing and community support."
+      },
+      {
+        "title": "Excellence",
+        "description": "We strive for excellence in every tool and resource we provide."
+      }
+    ]
+  }
+}

@@ -3,23 +3,25 @@ import { Search } from 'lucide-react';
 import videos from '../constants/Videos';
 import VideoCard from '../components/ui/VideoCard';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const VideoLibrary = () => {
   const navigate = useNavigate();
+  const {t} = useTranslation();
   
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
-  const categories = ['All', 'Water Management', 'Pest Control', 'Soil Health', 'Harvesting'];
+  const categories = [t('videoLibrary.categories.0'), t('videoLibrary.categories.1'),t('videoLibrary.categories.2'),t('videoLibrary.categories.3'), t('videoLibrary.categories.4')];
 
   return (
     <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Educational Videos
+          {t('videoLibrary.educational_videos.title')}
         </h1>
         <p className="text-xl text-gray-600">
-          Learn farming techniques from expert demonstrations
+          {t('videoLibrary.educational_videos.description')}
         </p>
       </div>
 
@@ -28,7 +30,7 @@ const VideoLibrary = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <input
             type="text"
-            placeholder="Search videos..."
+            placeholder={t('videoLibrary.search_videos')}
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

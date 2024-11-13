@@ -249,5 +249,5 @@ export type {
     TabButtonProps,
     FormDataType,
     Blog,
-    AccountData
+    AccountData,
 };

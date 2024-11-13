@@ -60,12 +60,13 @@ const AdminDashboard = () => {
           <Routes>
             <Route path="/" element={<DashboardOverview />} />
             <Route path="/blog" element={<BlogManagement />} />
-            <Route path="/videos" element={<VideoManagement />} />
+            <Route path="/videos" element={<VideoManagement />}>
+              <Route path="/upload-video" element={<VideoUpload />} />
+            </Route>
             <Route path="/create-blog" element={<CreateBlog onSave={() => {
               // Handle save logic here
               console.log('Blog saved');
             }} />} />
-            <Route path="/upload-video" element={<VideoUpload />} />
             <Route path="/settings" element={<Setting />} />
           </Routes>
         </main>

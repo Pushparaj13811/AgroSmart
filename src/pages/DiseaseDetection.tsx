@@ -3,10 +3,12 @@ import { AlertCircle } from 'lucide-react';
 import ImageUploader from '../components/ImageUploader';
 import DetectionResult from '../components/DetectionResult';
 import { DetectionResultData } from '../types/types';
+import { useTranslation } from 'react-i18next';
 
 const DiseaseDetection = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState<DetectionResultData | null>(null);
+  const { t } = useTranslation();
 
   const handleImageUpload = async (file: File) => {
     setIsAnalyzing(true);
@@ -33,10 +35,10 @@ const DiseaseDetection = () => {
     <div className="max-w-4xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Crop Disease Detection
+          {t('diseaseDetection.crop_disease_detection.title')}
         </h1>
         <p className="text-xl text-gray-600">
-          Upload an image of your crop to detect diseases and get treatment recommendations
+          {t('diseaseDetection.crop_disease_detection.description')}
         </p>
       </div>
 
@@ -58,12 +60,12 @@ const DiseaseDetection = () => {
         <div className="flex items-start">
           <AlertCircle className="h-6 w-6 text-blue-500 mt-1 mr-3" />
           <div>
-            <h3 className="font-semibold text-blue-900">Tips for better results:</h3>
+            <h3 className="font-semibold text-blue-900">{t('diseaseDetection.crop_disease_detection.tips.heading')}</h3>
             <ul className="mt-2 text-blue-800 space-y-2">
-              <li>• Ensure good lighting when taking photos</li>
-              <li>• Focus on the affected area of the plant</li>
-              <li>• Include both healthy and diseased parts for comparison</li>
-              <li>• Take multiple photos from different angles</li>
+              <li>• {t('diseaseDetection.crop_disease_detection.tips.tip1')}</li>
+              <li>• {t('diseaseDetection.crop_disease_detection.tips.tip2')}</li>
+              <li>• {t('diseaseDetection.crop_disease_detection.tips.tip3')}</li>
+              <li>• {t('diseaseDetection.crop_disease_detection.tips.tip4')}</li>
             </ul>
           </div>
         </div>

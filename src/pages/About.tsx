@@ -1,17 +1,42 @@
 import { Shield, Users, Leaf, Award } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const About = () => {
+  const { t } = useTranslation();
+  const missionList = [];
+
+  for (let i = 0; i < 4; i++) {
+    missionList.push(t(`about.mission.list.${i}`));
+  }
+
+  const values = [
+    {
+      icon: <Shield className="h-8 w-8 text-green-600" />,
+      title: t('about.values.list.0.title'),
+      description: t('about.values.list.0.description')
+    },
+    {
+      icon: <Users className="h-8 w-8 text-green-600" />,
+      title: t('about.values.list.1.title'),
+      description: t('about.values.list.1.description')
+    },
+    {
+      icon: <Award className="h-8 w-8 text-green-600" />,
+      title: t('about.values.list.2.title'),
+      description: t('about.values.list.2.description')
+    }
+  ];
+
   return (
     <div className="space-y-20 py-12">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-6">
-            About AgroSmart
+            {t('about.about.heading')}
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We're on a mission to revolutionize farming through technology,
-            making sustainable agriculture accessible to farmers worldwide.
+            {t('about.about.description')}
           </p>
         </div>
       </section>
@@ -22,20 +47,13 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Our Mission
+                {t('about.mission.heading')}
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                AgroSmart combines cutting-edge technology with agricultural expertise
-                to help farmers make informed decisions, increase yields, and practice
-                sustainable farming.
+                {t('about.mission.description')}
               </p>
               <ul className="space-y-4">
-                {[
-                  "Empower farmers with data-driven insights",
-                  "Promote sustainable farming practices",
-                  "Make expert knowledge accessible",
-                  "Build a community of modern farmers"
-                ].map((item, index) => (
+                {missionList.map((item, index) => (
                   <li key={index} className="flex items-center">
                     <Leaf className="h-5 w-5 text-green-600 mr-2" />
                     <span className="text-gray-700">{item}</span>
@@ -57,26 +75,10 @@ const About = () => {
       {/* Values Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-          Our Values
+          {t('about.values.heading')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: <Shield className="h-8 w-8 text-green-600" />,
-              title: "Trust & Reliability",
-              description: "We provide accurate, scientifically-backed information you can rely on."
-            },
-            {
-              icon: <Users className="h-8 w-8 text-green-600" />,
-              title: "Community First",
-              description: "We believe in the power of knowledge sharing and community support."
-            },
-            {
-              icon: <Award className="h-8 w-8 text-green-600" />,
-              title: "Excellence",
-              description: "We strive for excellence in every tool and resource we provide."
-            }
-          ].map((value, index) => (
+          {values.map((value, index) => (
             <div key={index} className="text-center p-6">
               <div className="inline-block mb-4">{value.icon}</div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">

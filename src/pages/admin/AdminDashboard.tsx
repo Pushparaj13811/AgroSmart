@@ -5,14 +5,14 @@ import BlogManagement from '../../components/admin/BlogManagement';
 import VideoManagement from '../../components/admin/VideoManagement';
 import Setting from '../../components/admin/Setting';
 import CreateBlog from '../../components/admin/CreateBlog';
-import VideoUpload from '../../components/admin/VideoUpload';
+import VideoUploadPage from './VideoUploadPage';
 
 const AdminDashboard = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen z-0 bg-gray-100">
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-64 bg-white shadow-md min-h-screen">
+        <aside className="w-64 bg-white top-16 sticky shadow-md h-screen">
           <div className="p-4">
             <h2 className="text-xl font-semibold text-gray-800">Admin Panel</h2>
           </div>
@@ -60,9 +60,8 @@ const AdminDashboard = () => {
           <Routes>
             <Route path="/" element={<DashboardOverview />} />
             <Route path="/blog" element={<BlogManagement />} />
-            <Route path="/videos" element={<VideoManagement />}>
-              <Route path="/upload-video" element={<VideoUpload />} />
-            </Route>
+            <Route path="/videos" element={<VideoManagement />} />
+            <Route path="/upload-video" element={<VideoUploadPage />} />
             <Route path="/create-blog" element={<CreateBlog onSave={() => {
               // Handle save logic here
               console.log('Blog saved');

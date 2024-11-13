@@ -1,0 +1,13 @@
+{
+  "crop_disease_detection": {
+    "title": "Crop Disease Detection",
+    "description": "Upload an image of your crop to detect diseases and get treatment recommendations.",
+    "tips": {
+      "heading": "Tips for better results:",
+      "tip1": "Ensure good lighting when taking photos.",
+      "tip2": "Focus on the affected area of the plant.",
+      "tip3": "Include both healthy and diseased parts for comparison.",
+      "tip4": "Take multiple photos from different angles."
+    }
+  }
+}

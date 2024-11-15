@@ -1,0 +1,22 @@
+{
+    "create_account": "आपन खाता बनाईं",
+    "join_farmers": "AgroSmart के उपयोग करत हजारों किसान से जुड़ीं",
+    "username": "प्रयोगकर्ता नाम",
+    "full_name": "पूरा नाम",
+    "email": "ईमेल पता",
+    "password": "पासवर्ड",
+    "confirm_password": "पासवर्ड के पुष्टि करीं",
+    "preferred_language": "मनपसंद भाषा",
+    "english": "English",
+    "hindi": "हिन्दी",
+    "nepali": "नेपाली",
+    "gujarati": "ગુજરાતી",
+    "bhojpuri": "भोजपुरी",
+    "bio": "बायो",
+    "profile_picture": "प्रोफ़ाइल चित्र (जरूरी)",
+    "cover_image": "कवर छवि (जरूरी)",
+    "signing_up": "साइन अप हो रहल बा...",
+    "sign_up": "साइन अप करीं",
+    "already_have_account": "का रउरा पास खाता बा?",
+    "sign_in": "साइन इन करीं"
+}

@@ -1,0 +1,22 @@
+{
+    "create_account": "Create your account",
+    "join_farmers": "Join thousands of farmers using AgroSmart",
+    "username": "Username",
+    "full_name": "Full Name",
+    "email": "Email address",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "preferred_language": "Preferred Language",
+    "english": "English",
+    "hindi": "हिन्दी",
+    "nepali": "नेपाली",
+    "gujarati": "ગુજરાતી",
+    "bhojpuri": "भोजपुरी",
+    "bio": "Bio",
+    "profile_picture": "Profile Picture (Required)",
+    "cover_image": "Cover Image (Required)",
+    "signing_up": "Signing up...",
+    "sign_up": "Sign up",
+    "already_have_account": "Already have an account?",
+    "sign_in": "Sign in"
+}

@@ -1,0 +1,22 @@
+{
+    "create_account": "તમારું ખાતું બનાવો",
+    "join_farmers": "AgroSmart નો ઉપયોગ કરતા હજારો ખેડૂતોમાં જોડાઓ",
+    "username": "યુઝરનેમ",
+    "full_name": "પૂર્ણ નામ",
+    "email": "ઈમેલ સરનામું",
+    "password": "પાસવર્ડ",
+    "confirm_password": "પાસવર્ડની પુષ્ટિ કરો",
+    "preferred_language": "પ્રિય ભાષા",
+    "english": "English",
+    "hindi": "हिन्दी",
+    "nepali": "नेपाली",
+    "gujarati": "ગુજરાતી",
+    "bhojpuri": "भोजपुरी",
+    "bio": "બાયો",
+    "profile_picture": "પ્રોફાઇલ ચિત્ર (આવશ્યક)",
+    "cover_image": "કવર છબી (આવશ્યક)",
+    "signing_up": "સાઇન અપ થઈ રહ્યું છે...",
+    "sign_up": "સાઇન અપ કરો",
+    "already_have_account": "તમે પાસે ખાતું છે?",
+    "sign_in": "સાઇન ઇન કરો"
+}

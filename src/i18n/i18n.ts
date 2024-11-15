@@ -66,6 +66,43 @@ import aboutNe from './locales/ne/about.json';
 import aboutBho from './locales/bhoj/about.json';
 import aboutGu from './locales/gu/about.json';
 
+// Login page translation 
+import loginEn from './locales/en/login.json';
+import loginHi from './locales/hi/login.json';
+import loginNe from './locales/ne/login.json';
+import loginBho from './locales/bhoj/login.json';
+import loginGu from './locales/gu/login.json';
+
+// Signup page translation
+import signupEn from './locales/en/signup.json';
+import signupHi from './locales/hi/signup.json';
+import signupNe from './locales/ne/signup.json';
+import signupBho from './locales/bhoj/signup.json';
+import signupGu from './locales/gu/signup.json';
+
+// Reset page translation
+import resetEn from './locales/en/reset.json';
+import resetHi from './locales/hi/reset.json';
+import resetNe from './locales/ne/reset.json';
+import resetBho from './locales/bhoj/reset.json';
+import resetGu from './locales/gu/reset.json';
+
+// Profile page translation
+import profileEn from './locales/en/profile.json';
+import profileHi from './locales/hi/profile.json';
+import profileNe from './locales/ne/profile.json';
+import profileBho from './locales/bhoj/profile.json';
+import profileGu from './locales/gu/profile.json';
+
+// Profile update form translation
+import profileUpdateFormEn from './locales/en/profileupdateform.json';
+import profileUpdateFormHi from './locales/hi/profileupdateform.json';
+import profileUpdateFormNe from './locales/ne/profileupdateform.json';
+import profileUpdateFormBho from './locales/bhoj/profileupdateform.json';
+import profileUpdateFormGu from './locales/gu/profileupdateform.json';
+
+const savedLanguage = localStorage.getItem('userLanguage') || 'en';
+
 i18n
     .use(initReactI18next)
     .init({
@@ -81,6 +118,11 @@ i18n
                     blog: blogEn,
                     diseaseDetection: diseaseDetectionEn,
                     about: aboutEn,
+                    login: loginEn,
+                    signup: signupEn,
+                    reset: resetEn,
+                    profile: profileEn,
+                    profileUpdateForm: profileUpdateFormEn,
                 }
             },
             hi: {
@@ -94,6 +136,11 @@ i18n
                     blog: blogHi,
                     diseaseDetection: diseaseDetectionHi,
                     about: aboutHi,
+                    login: loginHi,
+                    signup: signupHi,
+                    reset: resetHi,
+                    profile: profileHi,
+                    profileUpdateForm: profileUpdateFormHi,
                 }
             },
             ne: {
@@ -107,6 +154,11 @@ i18n
                     blog: blogNe,
                     diseaseDetection: diseaseDetectionNe,
                     about: aboutNe,
+                    login: loginNe,
+                    signup: signupNe,
+                    reset: resetNe,
+                    profile: profileNe,
+                    profileUpdateForm: profileUpdateFormNe,
                 }
             },
             bho: {
@@ -120,6 +172,11 @@ i18n
                     blog: blogBho,
                     diseaseDetection: diseaseDetectionBho,
                     about: aboutBho,
+                    login: loginBho,
+                    signup: signupBho,
+                    reset: resetBho,
+                    profile: profileBho,
+                    profileUpdateForm: profileUpdateFormBho,
                 }
             },
             gu: {
@@ -133,10 +190,15 @@ i18n
                     blog: blogGu,
                     diseaseDetection: diseaseDetectionGu,
                     about: aboutGu,
+                    login: loginGu,
+                    signup: signupGu,
+                    reset: resetGu,
+                    profile: profileGu,
+                    profileUpdateForm: profileUpdateFormGu,
                 }
             }
         },
-        lng: 'en',
+        lng: savedLanguage,
         fallbackLng: 'en',
         interpolation: {
             escapeValue: false,

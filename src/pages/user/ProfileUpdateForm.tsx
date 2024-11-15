@@ -13,9 +13,10 @@ import { Link } from 'react-router-dom';
 import PageTransition from '../../components/ui/PageTransition';
 import { userActions } from '../../store/userSlice';
 import { useDispatch } from 'react-redux';
-import { AppDispatch} from '../../store/store';
+import { AppDispatch } from '../../store/store';
 import { AccountData, UserProfileResponse } from '../../types/types';
 import CustomDropdown from '../../components/ui/CustomDropdown';
+import { useTranslation } from 'react-i18next';
 
 
 interface UserProfileFormData {
@@ -58,7 +59,6 @@ interface ProfileData {
     primaryCrops: string[];
     certifications: string[];
     lastSoilTest: string;
-    // ... other profile specific fields
 }
 type Bio = {
     bio: string;
@@ -68,12 +68,15 @@ type Language = {
 }
 
 const SUPPORTED_LANGUAGES = [
-    { value: 'english', label: 'English' },
-    { value: 'nepali', label: 'Nepali' },
-    { value: 'hindi', label: 'हिन्दी' }
+    { value: 'en', label: 'English' },
+    { value: 'ne', label: 'नेपाली' },
+    { value: 'hi', label: 'हिन्दी' },
+    { value: 'gu', label: 'ગુજરાતી' },
+    { value: 'bho', label: 'भोजपुरी' }
 ];
 
 const ProfileUpdateForm = () => {
+    const {t} = useTranslation();
     const dispatch = useDispatch<AppDispatch>();
     // const user = useSelector((state: RootState) => state.user.user) as User;
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -214,7 +217,7 @@ const ProfileUpdateForm = () => {
 
         try {
             if (!accountChanged && !profileChanged && !bioChanged && !languageChanged) {
-                setSubmitStatus({ type: 'error', message: 'No changes detected' });
+                setSubmitStatus({ type: 'error', message: t('profileUpdateForm.no_changes_detected') });
                 return;
             }
 
@@ -265,13 +268,13 @@ const ProfileUpdateForm = () => {
                 }
             }
 
-            setSubmitStatus({ type: 'success', message: 'Profile updated successfully!' });
+            setSubmitStatus({ type: 'success', message: t('profileUpdateForm.profile_updated_successfully') });
 
         } catch (error) {
             console.error('Update error:', error);
             setSubmitStatus({
                 type: 'error',
-                message: 'Failed to update profile. Please try again.'
+                message: t('profileUpdateForm.failed_to_update_profile')
             });
         } finally {
             setIsSubmitting(false);
@@ -289,12 +292,12 @@ const ProfileUpdateForm = () => {
                                 <CardHeader>
                                     <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
                                         <Crop className="text-green-600" size={20} />
-                                        Basic Information
+                                        {t('profileUpdateForm.basic_information')}
                                     </h2>
                                 </CardHeader>
                                 <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <Label htmlFor="username">Username</Label>
+                                        <Label htmlFor="username">{t('profileUpdateForm.username')}</Label>
                                         <Input
                                             id="username"
                                             name="username"
@@ -303,7 +306,7 @@ const ProfileUpdateForm = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="fullName">Full Name</Label>
+                                        <Label htmlFor="fullName">{t('profileUpdateForm.full_name')}</Label>
                                         <Input
                                             id="fullName"
                                             name="fullName"
@@ -312,7 +315,7 @@ const ProfileUpdateForm = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="email">Email</Label>
+                                        <Label htmlFor="email">{t('profileUpdateForm.email')}</Label>
                                         <Input
                                             id="email"
                                             name="email"
@@ -322,7 +325,7 @@ const ProfileUpdateForm = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="title">Title</Label>
+                                        <Label htmlFor="title">{t('profileUpdateForm.title')}</Label>
                                         <Input
                                             id="title"
                                             name="title"
@@ -331,7 +334,7 @@ const ProfileUpdateForm = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="location">Location</Label>
+                                        <Label htmlFor="location">{t('profileUpdateForm.location')}</Label>
                                         <Input
                                             id="location"
                                             name="location"
@@ -340,7 +343,7 @@ const ProfileUpdateForm = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="language">Language</Label>
+                                        <Label htmlFor="language">{t('profileUpdateForm.language')}</Label>
                                         <CustomDropdown
                                             id="language"
                                             name="language"
@@ -351,7 +354,7 @@ const ProfileUpdateForm = () => {
                                         />
                                     </div>
                                     <div className="md:col-span-2 space-y-2">
-                                        <Label htmlFor="bio">Bio</Label>
+                                        <Label htmlFor="bio">{t('profileUpdateForm.bio')}</Label>
                                         <Textarea
                                             id="bio"
                                             name="bio"
@@ -370,12 +373,12 @@ const ProfileUpdateForm = () => {
                                 <CardHeader>
                                     <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
                                         <Settings className="text-green-600" size={20} />
-                                        Farm Details
+                                        {t('profileUpdateForm.farm_details')}
                                     </h2>
                                 </CardHeader>
                                 <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <Label htmlFor="farmSize">Farm Size</Label>
+                                        <Label htmlFor="farmSize">{t('profileUpdateForm.farm_size')}</Label>
                                         <Input
                                             id="farmSize"
                                             name="farmSize"
@@ -384,7 +387,7 @@ const ProfileUpdateForm = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="primaryCrops">Primary Crops (comma-separated)</Label>
+                                        <Label htmlFor="primaryCrops">{t('profileUpdateForm.primary_crops')}</Label>
                                         <Input
                                             id="primaryCrops"
                                             name="primaryCrops"
@@ -393,7 +396,7 @@ const ProfileUpdateForm = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="certifications">Certifications (comma-separated)</Label>
+                                        <Label htmlFor="certifications">{t('profileUpdateForm.certifications')}</Label>
                                         <Input
                                             id="certifications"
                                             name="certifications"
@@ -402,7 +405,7 @@ const ProfileUpdateForm = () => {
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="lastSoilTest">Last Soil Test Date</Label>
+                                        <Label htmlFor="lastSoilTest">{t('profileUpdateForm.last_soil_test_date')}</Label>
                                         <Input
                                             id="lastSoilTest"
                                             name="lastSoilTest"
@@ -423,11 +426,11 @@ const ProfileUpdateForm = () => {
                             <div className="flex justify-end space-x-4">
                                 <Link to="/">
                                     <Button type="button" variant="outline" className="px-4 py-2.5 text-green-800 border-green-800 hover:bg-green-100" >
-                                        Cancel
+                                        {t('profileUpdateForm.cancel')}
                                     </Button>
                                 </Link>
                                 <Button type="submit" disabled={isSubmitting} className="bg-green-700 text-white hover:bg-green-600">
-                                    {isSubmitting ? 'Updating...' : 'Update Profile'}
+                                    {isSubmitting ? t('profileUpdateForm.updating') : t('profileUpdateForm.update_profile')}
                                 </Button>
                             </div>
                         </form>

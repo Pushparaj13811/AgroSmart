@@ -1,0 +1,22 @@
+{
+    "no_changes_detected": "कुनै परिवर्तन पत्ता लागेन",
+    "profile_updated_successfully": "प्रोफाइल सफलतापूर्वक अपडेट भयो!",
+    "failed_to_update_profile": "प्रोफाइल अपडेट गर्न असफल। कृपया पुन: प्रयास गर्नुहोस्।",
+    "basic_information": "मूल जानकारी",
+    "username": "प्रयोगकर्ता नाम",
+    "full_name": "पूरा नाम",
+    "email": "इमेल",
+    "title": "शीर्षक",
+    "location": "स्थान",
+    "language": "भाषा",
+    "select_language": "भाषा चयन गर्नुहोस्",
+    "bio": "बायो",
+    "farm_details": "फार्म विवरण",
+    "farm_size": "फार्म आकार",
+    "primary_crops": "मुख्य बालीहरू (अल्पविरामले छुट्याउनुहोस्)",
+    "certifications": "प्रमाणपत्रहरू (अल्पविरामले छुट्याउनुहोस्)",
+    "last_soil_test_date": "अन्तिम माटो परीक्षण मिति",
+    "cancel": "रद्द गर्नुहोस्",
+    "updating": "अपडेट गर्दै...",
+    "update_profile": "प्रोफाइल अपडेट गर्नुहोस्"
+}

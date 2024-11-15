@@ -1,0 +1,22 @@
+{
+    "no_changes_detected": "No changes detected",
+    "profile_updated_successfully": "Profile updated successfully!",
+    "failed_to_update_profile": "Failed to update profile. Please try again.",
+    "basic_information": "Basic Information",
+    "username": "Username",
+    "full_name": "Full Name",
+    "email": "Email",
+    "title": "Title",
+    "location": "Location",
+    "language": "Language",
+    "select_language": "Select language",
+    "bio": "Bio",
+    "farm_details": "Farm Details",
+    "farm_size": "Farm Size",
+    "primary_crops": "Primary Crops (comma-separated)",
+    "certifications": "Certifications (comma-separated)",
+    "last_soil_test_date": "Last Soil Test Date",
+    "cancel": "Cancel",
+    "updating": "Updating...",
+    "update_profile": "Update Profile"
+}

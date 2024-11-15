@@ -1,0 +1,22 @@
+{
+    "no_changes_detected": "કોઈ ફેરફાર દેખાયા નહીં",
+    "profile_updated_successfully": "પ્રોફાઇલ સફળતાપૂર્વક અપડેટ થઈ ગયું!",
+    "failed_to_update_profile": "પ્રોફાઇલ અપડેટ કરવામાં નિષ્ફળ. કૃપા કરીને ફરી પ્રયાસ કરો.",
+    "basic_information": "મૂળ માહિતી",
+    "username": "યુઝરનેમ",
+    "full_name": "પૂર્ણ નામ",
+    "email": "ઈમેલ",
+    "title": "શીર્ષક",
+    "location": "સ્થાન",
+    "language": "ભાષા",
+    "select_language": "ભાષા પસંદ કરો",
+    "bio": "બાયો",
+    "farm_details": "ખેતીની વિગતો",
+    "farm_size": "ખેતીનું કદ",
+    "primary_crops": "પ્રાથમિક પાકો (અલ્પવિરામથી અલગ કરો)",
+    "certifications": "પ્રમાણપત્રો (અલ્પવિરામથી અલગ કરો)",
+    "last_soil_test_date": "છેલ્લી માટી પરીક્ષણ તારીખ",
+    "cancel": "રદ્દ કરો",
+    "updating": "અપડેટ થઈ રહ્યું છે...",
+    "update_profile": "પ્રોફાઇલ અપડેટ કરો"
+}

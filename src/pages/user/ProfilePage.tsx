@@ -14,21 +14,34 @@ import type { User, UserProfileResponse } from '../../types/types';
 import { userActions } from '../../store/userSlice';
 import PageTransition from '../../components/ui/PageTransition';
 import AnimatedList from '../../components/ui/AnimatedList';
+import { useTranslation } from 'react-i18next';
 
+// Helper function to get stat icon
+const getStatIcon = (key: string, size = 18) => {
+    switch (key) {
+        case 'soilHealth':
+            return <Droplets className="text-blue-500" size={size} />;
+        case 'waterEfficiency':
+            return <Sun className="text-yellow-500" size={size} />;
+        case 'yieldForecast':
+            return <TrendingUp className="text-green-500" size={size} />;
+        case 'sustainability':
+            return <Crop className="text-emerald-500" size={size} />;
+        default:
+            return null;
+    }
+};
 
 const ProfilePage = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch<AppDispatch>();
     const user = useSelector((state: RootState) => state.user.user) as User;
     const userDetails = useSelector((state: RootState) => state.user.userProfile?.message) as UserProfileResponse;
     const [activeTab, setActiveTab] = useState('overview');
-    const resultAction = async () => {
-        if (userActions.getUserProfile.fulfilled.match(resultAction)) {
-        }
-    }
 
     useEffect(() => {
         if (!userDetails && user?._id) {
-            dispatch(userActions.getUserProfile({ _id: user._id }))
+            dispatch(userActions.getUserProfile({ _id: user._id }));
         }
     }, [dispatch, userDetails, user?._id]);
 
@@ -53,49 +66,41 @@ const ProfilePage = () => {
             sustainability: userDetails?.sustainability || 88
         },
         recentActivities: userDetails?.recentActivities || [
-            { date: "2024-03-20", activity: "Soil pH Analysis", status: "Completed" },
-            { date: "2024-03-18", activity: "Irrigation System Maintenance", status: "In Progress" },
-            { date: "2024-03-15", activity: "Crop Disease Assessment", status: "Completed" }
+            { id: '1', date: "2024-03-20", activity: "Soil pH Analysis", status: "Completed" },
+            { id: '2', date: "2024-03-18", activity: "Irrigation System Maintenance", status: "In Progress" },
+            { id: '3', date: "2024-03-15", activity: "Crop Disease Assessment", status: "Completed" }
         ],
         equipment: userDetails?.equipment || [
-            { name: "John Deere Tractor", status: "Active", lastMaintenance: "2024-02-15" },
-            { name: "Irrigation System", status: "Active", lastMaintenance: "2024-03-01" },
-            { name: "Harvester", status: "Maintenance", lastMaintenance: "2024-03-10" }
+            { id: '1', name: "John Deere Tractor", status: "Active", lastMaintenance: "2024-02-15" },
+            { id: '2', name: "Irrigation System", status: "Active", lastMaintenance: "2024-03-01" },
+            { id: '3', name: "Harvester", status: "Maintenance", lastMaintenance: "2024-03-10" }
         ]
     };
 
     return (
         <PageTransition>
             <div className="max-w-7xl mx-auto bg-gray-50 min-h-screen">
-                {/* Hero Section */}
-
                 <ProfileHero coverImage={typeof profile.coverimage === 'string' ? profile.coverimage : ""} />
 
-                {/* Profile Header */}
                 <ProfileHeader
                     name={profile.name}
                     avatar={typeof profile.avatar === 'string' ? profile.avatar : ""}
                     bio={profile.bio}
                     location={profile.location}
-                    experience={profile?.experience}
-                    certifications={profile?.certifications || []}
+                    experience={profile.experience}
+                    certifications={profile.certifications || []}
                     activeTab={activeTab}
                     setActiveTab={setActiveTab}
                 />
 
-                {/* Main Content */}
                 <div className="px-4 md:px-8 py-6">
                     <div className="max-w-7xl mx-auto">
-                        {/* Quick Stats Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                             {Object.entries(profile.farmStats).map(([key, value]) => (
-                                <Card key={key} className="bg-white">
+                                <Card key={`stat-${key}`} className="bg-white">
                                     <CardContent className="p-4">
                                         <h3 className="text-gray-600 font-medium mb-2 flex items-center gap-2">
-                                            {key === 'soilHealth' && <Droplets className="text-blue-500" size={18} />}
-                                            {key === 'waterEfficiency' && <Sun className="text-yellow-500" size={18} />}
-                                            {key === 'yieldForecast' && <TrendingUp className="text-green-500" size={18} />}
-                                            {key === 'sustainability' && <Crop className="text-emerald-500" size={18} />}
+                                            {getStatIcon(key)}
                                             {key.replace(/([A-Z])/g, ' $1').trim()}
                                         </h3>
                                         <div className="flex items-end gap-2">
@@ -107,27 +112,24 @@ const ProfilePage = () => {
                             ))}
                         </div>
 
-                        {/* Two Column Layout */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                            {/* Main Content Column */}
                             <div className="lg:col-span-2 space-y-6">
-                                {/* Farm Details */}
                                 <Card>
                                     <CardHeader className="border-b border-gray-100">
                                         <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
                                             <Crop className="text-green-600" size={20} />
-                                            Farm Overview
+                                            {t('profile.farm_overview')}
                                         </h2>
                                     </CardHeader>
                                     <CardContent className="p-4 grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <p className="text-sm text-gray-600 mb-1">Farm Size</p>
+                                            <p className="text-sm text-gray-600 mb-1">{t('profile.farm_size')}</p>
                                             <p className="text-lg font-medium">{profile.farmSize}</p>
                                             <div className="mt-4">
-                                                <p className="text-sm text-gray-600 mb-2">Primary Crops</p>
+                                                <p className="text-sm text-gray-600 mb-2">{t('profile.primary_crops')}</p>
                                                 <div className="flex gap-2 flex-wrap">
-                                                    {profile.primaryCrops.map(crop => (
-                                                        <span key={crop} className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
+                                                    {profile.primaryCrops.map((crop, index) => (
+                                                        <span key={`crop-${index}`} className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm">
                                                             {crop}
                                                         </span>
                                                     ))}
@@ -136,13 +138,12 @@ const ProfilePage = () => {
                                         </div>
                                         {profile.recentActivities.length > 0 && (
                                             <div>
-                                                <p className="text-sm text-gray-600 mb-1">Recent Activities</p>
+                                                <p className="text-sm text-gray-600 mb-1">{t('profile.recent_activities')}</p>
                                                 <div className="space-y-3">
                                                     <AnimatedList>
                                                         {profile.recentActivities.map(activity => (
-                                                            <div key={activity.date} className="flex items-center gap-3">
-                                                                <div className={`w-2 h-2 rounded-full ${activity.status === 'Completed' ? 'bg-green-500' : 'bg-yellow-500'
-                                                                    }`} />
+                                                            <div key={`activity-${activity}`} className="flex items-center gap-3">
+                                                                <div className={`w-2 h-2 rounded-full ${activity.status === 'Completed' ? 'bg-green-500' : 'bg-yellow-500'}`} />
                                                                 <div>
                                                                     <p className="text-sm font-medium">{activity.activity}</p>
                                                                     <p className="text-xs text-gray-500">{activity.date}</p>
@@ -156,26 +157,24 @@ const ProfilePage = () => {
                                     </CardContent>
                                 </Card>
 
-                                {/* Equipment Status */}
                                 {profile.equipment.length > 0 && (
                                     <Card>
                                         <CardHeader className="border-b border-gray-100">
                                             <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
                                                 <Settings className="text-green-600" size={20} />
-                                                Equipment Status
+                                                {t('profile.equipment_status')}
                                             </h2>
                                         </CardHeader>
                                         <CardContent className="p-0">
                                             <AnimatedList>
                                                 {profile.equipment.map(item => (
-                                                    <div key={item.name} className="flex items-center justify-between p-4 hover:bg-gray-50">
+                                                    <div key={`equipment-${item}`} className="flex items-center justify-between p-4 hover:bg-gray-50">
                                                         <div className="flex items-center gap-3">
-                                                            <div className={`w-3 h-3 rounded-full ${item.status === 'Active' ? 'bg-green-500' : 'bg-yellow-500'
-                                                                }`} />
+                                                            <div className={`w-3 h-3 rounded-full ${item.status === 'Active' ? 'bg-green-500' : 'bg-yellow-500'}`} />
                                                             <div>
                                                                 <p className="font-medium">{item.name}</p>
                                                                 <p className="text-sm text-gray-500">
-                                                                    Last maintained: {item.lastMaintenance}
+                                                                    {t('profile.last_maintained')}: {item.lastMaintenance}
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -188,64 +187,64 @@ const ProfilePage = () => {
                                 )}
                             </div>
 
-                            {/* Sidebar */}
                             <div className="space-y-6">
-                                {/* Weather & Alerts */}
                                 <Card className="bg-gradient-to-br from-blue-50 to-green-50">
                                     <CardContent className="p-4">
                                         <div className="flex items-center justify-between mb-4">
-                                            <h3 className="font-semibold text-gray-800">Today's Weather</h3>
+                                            <h3 className="font-semibold text-gray-800">{t('profile.todays_weather')}</h3>
                                             <Thermometer className="text-blue-500" size={20} />
                                         </div>
                                         <div className="space-y-3">
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-gray-600">Temperature</span>
-                                                <span className="font-medium">75°F</span>
-                                            </div>
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-gray-600">Humidity</span>
-                                                <span className="font-medium">65%</span>
-                                            </div>
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-gray-600">Wind Speed</span>
-                                                <span className="font-medium">8 mph</span>
-                                            </div>
+                                            {[
+                                                { label: t('profile.temperature'), value: '75°F' },
+                                                { label: t('profile.humidity'), value: '65%' },
+                                                { label: t('profile.windspeed'), value: '8 mph' }
+                                            ].map((item, index) => (
+                                                <div key={`weather-${index}`} className="flex items-center justify-between">
+                                                    <span className="text-gray-600">{item.label}</span>
+                                                    <span className="font-medium">{item.value}</span>
+                                                </div>
+                                            ))}
                                         </div>
                                     </CardContent>
                                 </Card>
 
-                                {/* Active Alerts */}
                                 <Card>
                                     <CardHeader className="border-b border-gray-100">
                                         <h2 className="font-semibold text-gray-800 flex items-center gap-2">
                                             <AlertTriangle className="text-yellow-500" size={18} />
-                                            Active Alerts
+                                            {t('profile.active_alerts')}
                                         </h2>
                                     </CardHeader>
                                     <CardContent className="p-4">
                                         <div className="space-y-3">
-                                            <div className="p-3 bg-yellow-50 rounded-lg">
-                                                <p className="text-sm font-medium text-yellow-800">Possible frost warning tonight</p>
-                                                <p className="text-xs text-yellow-600 mt-1">Take necessary precautions</p>
-                                            </div>
-                                            <div className="p-3 bg-blue-50 rounded-lg">
-                                                <p className="text-sm font-medium text-blue-800">Irrigation schedule update</p>
-                                                <p className="text-xs text-blue-600 mt-1">Check system settings</p>
-                                            </div>
+                                            {[
+                                                { id: 1, type: 'warning', title: 'Possible frost warning tonight', description: 'Take necessary precautions' },
+                                                { id: 2, type: 'info', title: 'Irrigation schedule update', description: 'Check system settings' }
+                                            ].map(alert => (
+                                                <div key={`alert-${alert.id}`} 
+                                                     className={`p-3 rounded-lg ${alert.type === 'warning' ? 'bg-yellow-50' : 'bg-blue-50'}`}>
+                                                    <p className={`text-sm font-medium ${alert.type === 'warning' ? 'text-yellow-800' : 'text-blue-800'}`}>
+                                                        {alert.title}
+                                                    </p>
+                                                    <p className={`text-xs mt-1 ${alert.type === 'warning' ? 'text-yellow-600' : 'text-blue-600'}`}>
+                                                        {alert.description}
+                                                    </p>
+                                                </div>
+                                            ))}
                                         </div>
                                     </CardContent>
                                 </Card>
 
-                                {/* Subscription Status */}
                                 <Card className="bg-gradient-to-br from-green-100 to-emerald-50">
                                     <CardContent className="p-4">
                                         <div className="flex items-center justify-between mb-4">
-                                            <h3 className="font-semibold text-gray-800">Premium Member</h3>
+                                            <h3 className="font-semibold text-gray-800">{t('profile.premium_member')}</h3>
                                             <ShieldCheck className="text-green-600" size={20} />
                                         </div>
-                                        <p className="text-sm text-gray-600 mb-3">Your subscription is active</p>
+                                        <p className="text-sm text-gray-600 mb-3">{t('profile.subscription_active')}</p>
                                         <button className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
-                                            Manage Subscription
+                                        {t('profile.manage_subscription')}
                                         </button>
                                     </CardContent>
                                 </Card>

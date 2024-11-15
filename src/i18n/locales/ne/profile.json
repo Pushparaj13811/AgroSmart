@@ -1,0 +1,16 @@
+{
+    "farm_overview": "फार्म अवलोकन",
+    "farm_size": "फार्म आकार",
+    "primary_crops": "मुख्य बालीहरू",
+    "recent_activities": "हालका क्रियाकलापहरू",
+    "equipment_status": "उपकरण स्थिति",
+    "last_maintained": "अन्तिम मर्मत",
+    "todays_weather": "आजको मौसम",
+    "active_alerts": "सक्रिय चेतावनीहरू",
+    "premium_member": "प्रीमियम सदस्य",
+    "subscription_active": "तपाईंको सदस्यता सक्रिय छ",
+    "manage_subscription": "सदस्यता व्यवस्थापन गर्नुहोस्",
+    "temperature": "तापक्रम",
+    "humidity": "आर्द्रता",
+    "windspeed": "हावा गति"
+}

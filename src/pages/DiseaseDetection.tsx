@@ -4,6 +4,7 @@ import ImageUploader from '../components/ImageUploader';
 import DetectionResult from '../components/DetectionResult';
 import { DetectionResultData } from '../types/types';
 import { useTranslation } from 'react-i18next';
+import PageTransition from '../components/ui/PageTransition';
 
 const DiseaseDetection = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -32,45 +33,47 @@ const DiseaseDetection = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          {t('diseaseDetection.crop_disease_detection.title')}
-        </h1>
-        <p className="text-xl text-gray-600">
-          {t('diseaseDetection.crop_disease_detection.description')}
-        </p>
-      </div>
+    <PageTransition>
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            {t('diseaseDetection.crop_disease_detection.title')}
+          </h1>
+          <p className="text-xl text-gray-600">
+            {t('diseaseDetection.crop_disease_detection.description')}
+          </p>
+        </div>
 
-      {!result && (
-        <ImageUploader
-          onUpload={handleImageUpload}
-          isLoading={isAnalyzing}
-        />
-      )}
+        {!result && (
+          <ImageUploader
+            onUpload={handleImageUpload}
+            isLoading={isAnalyzing}
+          />
+        )}
 
-      {result && (
-        <DetectionResult
-          result={result}
-          onReset={() => setResult(null)}
-        />
-      )}
+        {result && (
+          <DetectionResult
+            result={result}
+            onReset={() => setResult(null)}
+          />
+        )}
 
-      <div className="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <div className="flex items-start">
-          <AlertCircle className="h-6 w-6 text-blue-500 mt-1 mr-3" />
-          <div>
-            <h3 className="font-semibold text-blue-900">{t('diseaseDetection.crop_disease_detection.tips.heading')}</h3>
-            <ul className="mt-2 text-blue-800 space-y-2">
-              <li>• {t('diseaseDetection.crop_disease_detection.tips.tip1')}</li>
-              <li>• {t('diseaseDetection.crop_disease_detection.tips.tip2')}</li>
-              <li>• {t('diseaseDetection.crop_disease_detection.tips.tip3')}</li>
-              <li>• {t('diseaseDetection.crop_disease_detection.tips.tip4')}</li>
-            </ul>
+        <div className="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
+          <div className="flex items-start">
+            <AlertCircle className="h-6 w-6 text-blue-500 mt-1 mr-3" />
+            <div>
+              <h3 className="font-semibold text-blue-900">{t('diseaseDetection.crop_disease_detection.tips.heading')}</h3>
+              <ul className="mt-2 text-blue-800 space-y-2">
+                <li>• {t('diseaseDetection.crop_disease_detection.tips.tip1')}</li>
+                <li>• {t('diseaseDetection.crop_disease_detection.tips.tip2')}</li>
+                <li>• {t('diseaseDetection.crop_disease_detection.tips.tip3')}</li>
+                <li>• {t('diseaseDetection.crop_disease_detection.tips.tip4')}</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </PageTransition>
   );
 };
 

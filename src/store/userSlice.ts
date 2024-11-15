@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import * as userApi from '../api/userApi';
 import { RegisterFormData, User, UserState, ValidateAccessTokenResponse, UserProfileResponse, AccountData } from '../types/types';
+import i18next from 'i18next';
 
 const savedUser = localStorage.getItem('user');
 const savedUserProfile = localStorage.getItem('userProfile');
@@ -173,6 +174,7 @@ const userSlice = createSlice({
                     // Merge new user data with existing data
                     state.user = { ...state.user, ...action.payload };
                     localStorage.setItem('user', JSON.stringify(state.user));
+                    i18next.changeLanguage(action.payload.language);
                     state.status = 'succeeded';
                 }
             )

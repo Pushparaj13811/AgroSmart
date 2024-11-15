@@ -1,0 +1,12 @@
+{
+    "greeting" : "Welcome back",
+    "inst" : "Sign in to your account",
+    "email" : "Email address",
+    "password" : "Password",
+    "remember" : "Remember me",
+    "login" : "Sign in",
+    "waiting" : "Signing in...",
+    "lost" : "Forgot your password",
+    "new" : "Don't have an account? ",
+    "signup" : "Sign up"
+}

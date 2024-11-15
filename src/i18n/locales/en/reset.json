@@ -1,0 +1,8 @@
+{
+    "reset_password": "Reset your password",
+    "enter_email": "Enter your email to receive reset instructions",
+    "email": "Email address",
+    "send_reset": "Send reset instructions",
+    "check_email": "Check your email for password reset instructions",
+    "back_to_login": "Back to login"
+}

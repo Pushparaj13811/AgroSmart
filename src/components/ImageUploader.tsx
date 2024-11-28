@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { Image as ImageIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface ImageUploaderProps {
   onUpload: (file: File) => void;
@@ -7,6 +8,7 @@ interface ImageUploaderProps {
 }
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload, isLoading }) => {
+  const { t } = useTranslation();
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
       e.preventDefault();
@@ -51,10 +53,10 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload, isLoading }) =>
           )}
         </div>
         <p className="text-xl font-medium text-gray-700 mb-2">
-          {isLoading ? 'Analyzing image...' : 'Drop your image here'}
+          {isLoading ? t('diseaseDetection.ImageUpload.analyzing_image') : t('diseaseDetection.ImageUpload.drop_your_image_here')}
         </p>
         <p className="text-gray-500">
-          {isLoading ? 'Please wait while we process your image' : 'or click to upload'}
+          {isLoading ? t('diseaseDetection.ImageUpload.please_wait') : t('diseaseDetection.ImageUpload.or_click_to_upload')}
         </p>
       </label>
     </div>

@@ -7,6 +7,8 @@ import store, { RootState } from './store/store';
 import ProtectedRoute from './services/protectedRoutes';
 import { AnimatePresence } from 'framer-motion';
 import VideoPage from './pages/video/VideoPage';
+import HistoryPage from './pages/HistoryPage';
+import HistoryDetailPage from './pages/HistoryDetailPage';
 
 // Lazy load components individually from pages/index.ts
 const About = lazy(() => import('./pages').then(module => ({ default: module.About })));
@@ -53,6 +55,17 @@ function App() {
               <Route path="/update-profile" element={
                 <ProtectedRoute>
                   <ProfileUpdateForm />
+                </ProtectedRoute>
+              } />
+              <Route path="/history" element={
+                <ProtectedRoute>
+                  <HistoryPage />
+                </ProtectedRoute>
+              } />
+
+              <Route path="/history/:id" element={
+                <ProtectedRoute>
+                  <HistoryDetailPage />
                 </ProtectedRoute>
               } />
 

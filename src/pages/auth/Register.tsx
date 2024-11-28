@@ -20,7 +20,7 @@ const Register = () => {
     confirmPassword: '',
     fullName: '',
     role: 'user',
-    language: 'english',
+    language: 'en',
     bio: ''
   });
   const dispatch = useDispatch<AppDispatch>();

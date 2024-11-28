@@ -7,6 +7,7 @@ const ApiUrl = import.meta.env.VITE_BACKEND_URL;
 const register = async (user: User) => {
   try {
     const response = await axios.post(`${ApiUrl}/users/register`, user, { withCredentials: true });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {

@@ -1,5 +1,18 @@
 {
+  "ImageUpload": {
+    "analyzing_image": "Analyzing image...",
+    "drop_your_image_here": "Drop your image here",
+    "please_wait": "Please wait while we process your image",
+    "or_click_to_upload": "or click to upload"
+  },
+  "history": {
+    "title": "Detection History",
+    "description": "View the history of your crop disease detection requests.",
+    "no_history": "No history found.",
+    "back_to_detection": "Back to Crop Disease Detection"
+  },
   "crop_disease_detection": {
+    "view_history": "View History",
     "title": "Crop Disease Detection",
     "description": "Upload an image of your crop to detect diseases and get treatment recommendations.",
     "tips": {

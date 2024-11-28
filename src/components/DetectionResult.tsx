@@ -3,17 +3,33 @@ import { AlertTriangle, CheckCircle, RefreshCw } from 'lucide-react';
 
 interface DetectionResultProps {
   result: {
-    disease: string;
-    confidence: number;
-    description: string;
-    treatment: string;
-    preventiveMeasures: string[];
+    imageUrl: string;
+    message: string;
+    prediction: {
+      predicted_class: string;
+      predicted_crop: string;
+      isHealthy: string;
+      predicted_diseases: string;
+      confidence_percentage: number;
+    };
+    recommendations: {
+      curative_measures?: string[]; // Make these optional
+      organic_treatment?: string[];
+      pesticides?: string[];
+      preventive_measures?: string[];
+    };
   };
   onReset: () => void;
 }
 
 const DetectionResult: React.FC<DetectionResultProps> = ({ result, onReset }) => {
-  const isHighConfidence = result.confidence > 90;
+  const isHighConfidence = result.prediction.confidence_percentage > 90;
+
+  // Fallback to empty arrays if undefined
+  const curativeMeasures = result.recommendations?.curative_measures || [];
+  const organicTreatment = result.recommendations?.organic_treatment || [];
+  const pesticides = result.recommendations?.pesticides || [];
+  const preventiveMeasures = result.recommendations?.preventive_measures || [];
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
@@ -26,10 +42,10 @@ const DetectionResult: React.FC<DetectionResultProps> = ({ result, onReset }) =>
           )}
           <div>
             <h2 className="text-2xl font-bold text-gray-900">
-              {result.disease}
+              {result.prediction.predicted_class} ({result.prediction.predicted_crop})
             </h2>
             <p className="text-gray-600">
-              Confidence: {result.confidence}%
+              Confidence: {result.prediction.confidence_percentage}%
             </p>
           </div>
         </div>
@@ -44,25 +60,51 @@ const DetectionResult: React.FC<DetectionResultProps> = ({ result, onReset }) =>
 
       <div className="space-y-6">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            Description
-          </h3>
-          <p className="text-gray-700">{result.description}</p>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Prediction</h3>
+          <p className="text-gray-700">Disease: {result.prediction.predicted_diseases}</p>
+          <p className="text-gray-700">Health Status: {result.prediction.isHealthy}</p>
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            Recommended Treatment
-          </h3>
-          <p className="text-gray-700">{result.treatment}</p>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Image</h3>
+          <img
+            src={result.imageUrl}
+            alt="Crop diagnosis"
+            className="w-full h-auto rounded-lg shadow-md"
+          />
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            Preventive Measures
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Curative Measures</h3>
           <ul className="list-disc list-inside text-gray-700 space-y-1">
-            {result.preventiveMeasures.map((measure, index) => (
+            {curativeMeasures.map((measure, index) => (
+              <li key={index}>{measure}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Organic Treatment</h3>
+          <ul className="list-disc list-inside text-gray-700 space-y-1">
+            {organicTreatment.map((treatment, index) => (
+              <li key={index}>{treatment}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Pesticides</h3>
+          <ul className="list-disc list-inside text-gray-700 space-y-1">
+            {pesticides.map((pesticide, index) => (
+              <li key={index}>{pesticide}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Preventive Measures</h3>
+          <ul className="list-disc list-inside text-gray-700 space-y-1">
+            {preventiveMeasures.map((measure, index) => (
               <li key={index}>{measure}</li>
             ))}
           </ul>

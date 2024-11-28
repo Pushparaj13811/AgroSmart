@@ -15,6 +15,8 @@ import { userActions } from '../../store/userSlice';
 import PageTransition from '../../components/ui/PageTransition';
 import AnimatedList from '../../components/ui/AnimatedList';
 import { useTranslation } from 'react-i18next';
+import { getContinuousWeatherUpdate, getWeather, stopContinuousWeatherUpdate } from '../../store/weatherSlice';
+
 
 // Helper function to get stat icon
 const getStatIcon = (key: string, size = 18) => {
@@ -35,15 +37,30 @@ const getStatIcon = (key: string, size = 18) => {
 const ProfilePage = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch<AppDispatch>();
+    const weather = useSelector((state: RootState) => state.weatherSlice.data);
+    const status = useSelector((state: RootState) => state.weatherSlice.status === 'loading');
+    // const error = useSelector((state: RootState) => state.weatherSlice.error);
+
     const user = useSelector((state: RootState) => state.user.user) as User;
     const userDetails = useSelector((state: RootState) => state.user.userProfile?.message) as UserProfileResponse;
     const [activeTab, setActiveTab] = useState('overview');
 
+
+
     useEffect(() => {
+        if (!weather && !status) {
+            dispatch(getWeather());
+        }
+
         if (!userDetails && user?._id) {
             dispatch(userActions.getUserProfile({ _id: user._id }));
         }
-    }, [dispatch, userDetails, user?._id]);
+        dispatch(getContinuousWeatherUpdate());
+
+        return () => {
+            dispatch(stopContinuousWeatherUpdate());
+        };
+    }, [dispatch, weather, status, userDetails, user?._id]);
 
     const profile = {
         name: userDetails?.fullName || "John Doe",
@@ -195,16 +212,26 @@ const ProfilePage = () => {
                                             <Thermometer className="text-blue-500" size={20} />
                                         </div>
                                         <div className="space-y-3">
-                                            {[
-                                                { label: t('profile.temperature'), value: '75°F' },
-                                                { label: t('profile.humidity'), value: '65%' },
-                                                { label: t('profile.windspeed'), value: '8 mph' }
-                                            ].map((item, index) => (
-                                                <div key={`weather-${index}`} className="flex items-center justify-between">
-                                                    <span className="text-gray-600">{item.label}</span>
-                                                    <span className="font-medium">{item.value}</span>
-                                                </div>
-                                            ))}
+                                            {weather ? (
+
+                                                <>
+                                                    {console.log(weather.data[0].alerts)}
+                                                    <div key="weather-temperature" className="flex items-center justify-between">
+                                                        <span className="text-gray-600">Temperature:</span>
+                                                        <span className="font-medium">{weather.data[0].temperature}°C</span>
+                                                    </div>
+                                                    <div key="weather-humidity" className="flex items-center justify-between">
+                                                        <span className="text-gray-600">Humidity:</span>
+                                                        <span className="font-medium">{weather.data[0].humidity}%</span>
+                                                    </div>
+                                                    <div key="weather-wind-speed" className="flex items-center justify-between">
+                                                        <span className="text-gray-600">Wind Speed:</span>
+                                                        <span className="font-medium">{weather.data[0].windSpeed} kph</span>
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <p>No weather data available.</p>
+                                            )}
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -218,21 +245,30 @@ const ProfilePage = () => {
                                     </CardHeader>
                                     <CardContent className="p-4">
                                         <div className="space-y-3">
-                                            {[
-                                                { id: 1, type: 'warning', title: 'Possible frost warning tonight', description: 'Take necessary precautions' },
-                                                { id: 2, type: 'info', title: 'Irrigation schedule update', description: 'Check system settings' }
-                                            ].map(alert => (
-                                                <div key={`alert-${alert.id}`} 
-                                                     className={`p-3 rounded-lg ${alert.type === 'warning' ? 'bg-yellow-50' : 'bg-blue-50'}`}>
-                                                    <p className={`text-sm font-medium ${alert.type === 'warning' ? 'text-yellow-800' : 'text-blue-800'}`}>
-                                                        {alert.title}
-                                                    </p>
-                                                    <p className={`text-xs mt-1 ${alert.type === 'warning' ? 'text-yellow-600' : 'text-blue-600'}`}>
-                                                        {alert.description}
-                                                    </p>
-                                                </div>
-                                            ))}
+                                            {weather?.data[0]?.alerts ? (
+                                                Object.entries(weather.data[0].alerts).map(([key, value]) => {
+                                                    // Check if the crop has an alert
+                                                    return Object.entries(value).map(([crop, alertMessage]) => (
+                                                        alertMessage ? (
+                                                            <div
+                                                                key={`alert-${key}-${crop}`}
+                                                                className={`p-3 rounded-lg ${key === 'heatStress' || key === 'frost' || key === 'windDamage' ? 'bg-yellow-50' : 'bg-blue-50'}`}
+                                                            >
+                                                                <p className={`text-sm font-medium ${key === 'heatStress' || key === 'frost' || key === 'windDamage' ? 'text-yellow-800' : 'text-blue-800'}`}>
+                                                                    {`${crop} - ${key.replace(/([A-Z])/g, ' $1').toLowerCase()} warning: ${alertMessage}`}
+                                                                </p>
+                                                                <p className={`text-xs mt-1 ${key === 'heatStress' || key === 'frost' || key === 'windDamage' ? 'text-yellow-600' : 'text-blue-600'}`}>
+                                                                    Take necessary precautions
+                                                                </p>
+                                                            </div>
+                                                        ) : null
+                                                    ));
+                                                })
+                                            ) : (
+                                                <p>No alerts available.</p>
+                                            )}
                                         </div>
+
                                     </CardContent>
                                 </Card>
 
@@ -244,7 +280,7 @@ const ProfilePage = () => {
                                         </div>
                                         <p className="text-sm text-gray-600 mb-3">{t('profile.subscription_active')}</p>
                                         <button className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
-                                        {t('profile.manage_subscription')}
+                                            {t('profile.manage_subscription')}
                                         </button>
                                     </CardContent>
                                 </Card>

@@ -1,5 +1,4 @@
 import api from '../services/api';
-import { VideoData } from "../types/types";
 
 const ApiUrl = import.meta.env.VITE_BACKEND_URL;
 

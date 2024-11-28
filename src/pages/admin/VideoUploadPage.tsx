@@ -3,36 +3,44 @@ import { Upload, AlertCircle, CheckCircle2 } from 'lucide-react';
 import VideoUpload from '../../components/admin/VideoUpload';
 import { Alert, AlertDescription, AlertTitle } from '../../components/ui/alert';
 import PageTransition from '../../components/ui/PageTransition';
+import { videoActions, VideoStateWithUploadProgress } from '../../store/videoSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '../../store/store';
 
 const VideoUploadPage: React.FC = () => {
     const [uploadStatus, setUploadStatus] = useState<'idle' | 'success' | 'error'>('idle');
-    const [uploadProgress, setUploadProgress] = useState(0);
+    const uploadProgress = useSelector((state: { videos: VideoStateWithUploadProgress }) => state.videos.uploadProgress);
+    const dispatch = useDispatch<AppDispatch>();
+
 
     const handleVideoUpload = async (videoData: {
         title: string;
         description: string;
         videoFile: File;
-        thumbnailFile: File | null
+        thumbnailFile: File | null;
     }) => {
         try {
-            // Simulate upload progress
             setUploadStatus('idle');
-            for (let i = 0; i <= 100; i += 10) {
-                setUploadProgress(i);
-                await new Promise(resolve => setTimeout(resolve, 500));
+            if (!videoData.title || !videoData.description || !videoData.videoFile) {
+                throw new Error('Missing required video data');
             }
 
-            console.log('Video uploaded:', videoData);
-            setUploadStatus('success');
-
-            // Reset progress after success
-            setTimeout(() => {
-                setUploadProgress(0);
-                setUploadStatus('idle');
-            }, 3000);
+            const formData = new FormData();
+            formData.append("title", videoData.title);
+            formData.append("description", videoData.description);
+            formData.append("videoFile", videoData.videoFile);
+            if (videoData.thumbnailFile) {
+                formData.append("thumbnailFile", videoData.thumbnailFile);
+            }
+            const response = dispatch(videoActions.createVideo({ videoData: formData }));
+            if (videoActions.createVideo.fulfilled.match(response)) {
+                const result = response.payload;
+                console.log('Video upload result:', result);
+                setUploadStatus('success');
+            }
 
         } catch (error) {
-            console.error('Upload failed:', error);
+            console.error('Error uploading video:', error);
             setUploadStatus('error');
         }
     };
@@ -77,7 +85,7 @@ const VideoUploadPage: React.FC = () => {
                         </Alert>
                     )}
 
-                    {/* Upload Progress */}
+                    {/* Upload Progress Bar */}
                     {uploadProgress > 0 && uploadProgress < 100 && (
                         <div className="mb-6">
                             <div className="flex justify-between mb-2">
@@ -96,6 +104,7 @@ const VideoUploadPage: React.FC = () => {
                     {/* Main Upload Section */}
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                         <div className="p-1">
+                            {/* Pass `handleVideoUpload` as a prop */}
                             <VideoUpload onUpload={handleVideoUpload} />
                         </div>
                     </div>
@@ -103,9 +112,7 @@ const VideoUploadPage: React.FC = () => {
                     {/* Help Section */}
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-200">
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                Video Requirements
-                            </h3>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2">Video Requirements</h3>
                             <ul className="space-y-2 text-gray-600">
                                 <li>• Maximum file size: 100MB</li>
                                 <li>• Supported formats: MP4, MOV, AVI</li>
@@ -114,9 +121,7 @@ const VideoUploadPage: React.FC = () => {
                         </div>
 
                         <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-200">
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                Thumbnail Tips
-                            </h3>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2">Thumbnail Tips</h3>
                             <ul className="space-y-2 text-gray-600">
                                 <li>• Recommended size: 1280x720</li>
                                 <li>• Max file size: 2MB</li>
@@ -125,9 +130,7 @@ const VideoUploadPage: React.FC = () => {
                         </div>
 
                         <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-200">
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                Best Practices
-                            </h3>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-2">Best Practices</h3>
                             <ul className="space-y-2 text-gray-600">
                                 <li>• Use clear, descriptive titles</li>
                                 <li>• Add detailed descriptions</li>

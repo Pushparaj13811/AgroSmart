@@ -35,12 +35,25 @@ interface Video {
     category: string;
 }
 
+
 interface DetectionResultData {
-    disease: string;
-    confidence: number;
-    description: string;
-    treatment: string;
-    preventiveMeasures: string[];
+    data: {
+        imageUrl: string;
+        message: string;
+        prediction: {
+            predicted_class: string;
+            predicted_crop: string;
+            isHealthy: string;
+            predicted_diseases: string;
+            confidence_percentage: number;
+        };
+        recommendations: {
+            curative_measures: string[];
+            organic_treatment: string[];
+            pesticides: string[];
+            preventive_measures: string[];
+        };
+    }
 }
 
 interface Post {
@@ -151,8 +164,8 @@ interface VideoData {
     thumbnail: File;
     title: string;
     description: string;
-    duration: string;
-    category: string;
+    duration?: string;
+    category?: string;
 }
 
 interface ArticleState {
@@ -225,6 +238,33 @@ interface AccountData {
     username: string;
 }
 
+interface Recommendation {
+    curative_measures: string[];
+    organic_treatment: string[];
+    pesticides: string[];
+    preventive_measures: string[];
+}
+
+interface Prediction {
+    predicted_class: string;
+    predicted_crop: string;
+    isHealthy: string;
+    predicted_diseases: string;
+    confidence_percentage: number;
+    recommendations: Recommendation;
+    details?: string;
+}
+
+interface HistoryItem {
+    _id: string;
+    createdAt: string;
+    updatedAt: string;
+    userId: string;
+    image: string;
+    prediction: Prediction;
+    recommendations: Recommendation;
+}
+
 export type {
     LucideIconName,
     ValidateAccessTokenResponse,
@@ -250,4 +290,5 @@ export type {
     FormDataType,
     Blog,
     AccountData,
+    HistoryItem,
 };

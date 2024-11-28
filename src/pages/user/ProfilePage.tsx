@@ -248,7 +248,7 @@ const ProfilePage = () => {
                                             {weather?.data[0]?.alerts ? (
                                                 Object.entries(weather.data[0].alerts).map(([key, value]) => {
                                                     // Check if the crop has an alert
-                                                    return Object.entries(value).map(([crop, alertMessage]) => (
+                                                    return Object.entries(value as { [key: string]: string }).map(([crop, alertMessage]) => (
                                                         alertMessage ? (
                                                             <div
                                                                 key={`alert-${key}-${crop}`}

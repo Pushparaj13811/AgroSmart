@@ -3,16 +3,12 @@ import * as weatherApi from "../api/weatherApi";
 
 export const getWeather = createAsyncThunk<any, void>("weather/getWeather", weatherApi.getWeather);
 
-export const getContinuousWeatherUpdate = createAsyncThunk<any, void>(
+export const getContinuousWeatherUpdate = createAsyncThunk<void, void>(
     "weather/getContinuouslyWeather",
     async (_, { dispatch }) => {
-        const eventSource = weatherApi.getContinuosWeatherUpdate((weatherData) => {
+        weatherApi.getContinuosWeatherUpdate((weatherData) => {
             dispatch(updateContinuousWeather(weatherData));
         });
-
-        dispatch(setEventSource(eventSource));
-
-        return;
     }
 );
 
@@ -34,25 +30,23 @@ const weatherSlice = createSlice({
     initialState: {
         data: null as any,
         continuousUpdates: [] as any[],
+        eventSource: null as EventSource | null,
         status: "idle",
         error: null as string | null,
-        eventSource: null as EventSource | null, // Store the EventSource here
     },
     reducers: {
         updateContinuousWeather: (state, action: PayloadAction<any>) => {
             state.continuousUpdates.push(action.payload);
         },
-        setEventSource: (state, action: PayloadAction<EventSource>) => {
-            state.eventSource = action.payload;
-        },
         clearEventSource: (state) => {
             state.eventSource = null;
-        }
+        },
     },
     extraReducers: (builder) =>
         builder
             .addMatcher(
-                (action): action is PayloadAction<unknown> => action.type.startsWith("weather/getWeather") && action.type.endsWith("/pending"),
+                (action): action is PayloadAction<unknown> =>
+                    action.type.startsWith("weather/getWeather") && action.type.endsWith("/pending"),
                 (state) => {
                     state.status = "loading";
                     state.error = null;
@@ -74,6 +68,6 @@ const weatherSlice = createSlice({
             ),
 });
 
-export const { updateContinuousWeather, setEventSource, clearEventSource } = weatherSlice.actions;
+export const { updateContinuousWeather, clearEventSource } = weatherSlice.actions;
 
 export default weatherSlice.reducer;

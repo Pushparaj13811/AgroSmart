@@ -213,9 +213,7 @@ const ProfilePage = () => {
                                         </div>
                                         <div className="space-y-3">
                                             {weather ? (
-
                                                 <>
-                                                    {console.log(weather.data[0].alerts)}
                                                     <div key="weather-temperature" className="flex items-center justify-between">
                                                         <span className="text-gray-600">Temperature:</span>
                                                         <span className="font-medium">{weather.data[0].temperature}°C</span>

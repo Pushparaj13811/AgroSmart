@@ -12,7 +12,9 @@ const getWeather = async () => {
 }
 
 const getContinuosWeatherUpdate = (callback: (data: any) => void) => {
-    const eventSource = new EventSource(`${ApiUrl}/weather/update`);
+    const eventSource = new EventSource(`${ApiUrl}/weather/updates`, {
+        withCredentials: true,
+    });
 
     eventSource.onmessage = (event) => {
         const weatherData = JSON.parse(event.data);
@@ -24,7 +26,7 @@ const getContinuosWeatherUpdate = (callback: (data: any) => void) => {
         eventSource.close();
     };
 
-    return eventSource; 
+    return eventSource;
 };
 
 

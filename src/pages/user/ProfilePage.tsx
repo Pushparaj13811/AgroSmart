@@ -17,7 +17,6 @@ import AnimatedList from '../../components/ui/AnimatedList';
 import { useTranslation } from 'react-i18next';
 import { getContinuousWeatherUpdate, getWeather, stopContinuousWeatherUpdate } from '../../store/weatherSlice';
 
-
 // Helper function to get stat icon
 const getStatIcon = (key: string, size = 18) => {
     switch (key) {
